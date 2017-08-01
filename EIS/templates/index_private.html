@@ -1,2 +1,20 @@
-ЕИС {{ EIS_NAME }}. Закрытая часть.
-<p>{{ EIS_VERSION }}</p>
+{% include "header.html" %}
+    <table>
+        <tr>
+            <td align="center">
+                <div class="eis_name"> <a href="/">ЕИС {{ EIS_NAME }}</a> </div>
+                <div class="eis_user"> {{user.first_name}} {{user.last_name}} <a href="/admin/logout/"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i></a> </div>
+            </td>
+        </tr>
+        <tr><td><hr></td></tr>
+        <tr>
+            <td>
+                <div class="menu">
+                {% include "menu.html" %}
+                </div>
+            </td>
+        </tr>
+    </table>
+
+{% include "footer.html" %}
+{% include "end.html" %}

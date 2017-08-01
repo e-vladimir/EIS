@@ -18,6 +18,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'', views.page_index),
+    url(r'^admin/logout/', views.logout),
     url(r'^admin/', admin.site.urls),
+    url(r'', views.page_index),
 ]
