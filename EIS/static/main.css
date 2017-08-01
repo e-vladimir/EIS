@@ -17,7 +17,7 @@ body {
     width: 100%;
     }
 
-.eis_name {
+h1 {
     font-size: 1.6em;
     font-weight: bold;
     }
@@ -34,7 +34,7 @@ body {
 .menu {
     width: 150px;
     padding: 5px;
-    margin: 0px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
     }
 
 .menu div {
