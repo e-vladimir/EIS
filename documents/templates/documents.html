@@ -22,7 +22,7 @@
 
                 {% for document in category.list %}
                     <tr>
-                        <td><b><a href="/documents/view/{{ document.id }}/">{{ document.name }}</a></b><br>
+                        <td><b><a href="/documents/view/{{ document.pk }}/">{{ document.name }}</a></b><br>
                         {{ document.date }}</td>
                         <td><a href="{{ document.file_pdf.url }}"><i class="fa fa-search" aria-hidden="true"></i> Просмотр</a> &nbsp;<br>
                         <a href="{{ document.file.url }}"><i class="fa fa-download" aria-hidden="true"></i> Скачать</a> &nbsp;</td>

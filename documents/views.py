@@ -21,6 +21,14 @@ def page_documents(request):
 		return render(request, 'index_public.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
 
 
+def page_document_view(request):
+	pass
+
+
+def page_document_edit(request):
+	pass
+
+
 def page_document_new(request):
 	if request.user.is_authenticated():
 		if request.method == "POST":
@@ -30,8 +38,6 @@ def page_document_new(request):
 				document = form.save(commit=False)
 				document.update_user = "{0} {1}".format(request.user.first_name, request.user.last_name)
 				document.update_date = timezone.now()
-
-				# Загрузка документов
 
 				document.save()
 
