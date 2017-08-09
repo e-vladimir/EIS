@@ -7,7 +7,35 @@
     </table>
 </div>
 
-<div class="content">Документы</div>
+<div class="content">
+    <h1>Документы</h1>
+
+    <table rules="rows">
+        {% regroup documents by category as categories %}
+            {% for category in categories %}
+            <tr bgcolor="CCCCCC">
+                <td><i class="fa fa-folder-o fa-fw" aria-hidden="true"></i>&nbsp;<b>{{ category.grouper | upper }}</b></td>
+                <td align="center">&nbsp;</td>
+                <td align="center">&nbsp;</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+
+                {% for document in category.list %}
+                    <tr>
+                        <td><b><a href="/documents/view/{{ document.id }}/">{{ document.name }}</a></b><br>
+                        {{ document.date }}</td>
+                        <td><a href="{{ document.file_pdf.url }}"><i class="fa fa-search" aria-hidden="true"></i> Просмотр</a> &nbsp;<br>
+                        <a href="{{ document.file.url }}"><i class="fa fa-download" aria-hidden="true"></i> Скачать</a> &nbsp;</td>
+                        <td><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{ document.update_user }}<br>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ document.update_date|date:"Y-m-d" }}</td>
+                    </tr>
+            {% endfor %}
+
+        <tr><td>&nbsp;</td></tr>
+        {% endfor %}
+    </table>
+
+</div>
 
 {% include "footer.html" %}
 {% include "end.html" %}

@@ -1,6 +1,61 @@
 {% include "header.html" %}
 
-{% include "docs_menu.html" %}
+<div class="menu">
+    <table width="100%">
+        {% include "menu.html" %}
+    </table>
+</div>
+
+<div class="content">
+    <h1>Новый документ</h1>
+
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <table>
+            <tr>
+                <td>Название</td>
+                <td>&nbsp;</td>
+                <td>{{ form.name }}</td>
+            </tr>
+            <tr>
+                <td>Дата утверждения</td>
+                <td>&nbsp;</td>
+                <td>{{ form.date }}</td>
+            </tr>
+
+
+            <tr><td colspan="3"><hr></td></tr>
+
+            <tr>
+                <td>Категория документа</td>
+                <td>&nbsp;</td>
+                <td>{{ form.category }}</td>
+            </tr>
+
+            <tr><td colspan="3"><hr></td></tr>
+
+            <tr>
+                <td>PDF-версия</td>
+                <td>&nbsp;</td>
+                <td>{{ form.file_pdf }}</td>
+            </tr>
+            <tr>
+                <td>Файл</td>
+                <td>&nbsp;</td>
+                <td>{{ form.file }}</td>
+            </tr>
+
+            <tr><td colspan="3"><hr></td></tr>
+
+            <tr>
+                <td>Примечание</td>
+                <td>&nbsp;</td>
+                <td>{{ form.note }}</td>
+            </tr>
+
+        </table>
+        <button type="submit" class="save btn btn-default">Сохранить</button>
+    </form>
+</div>
 
 {% include "footer.html" %}
 {% include "end.html" %}
