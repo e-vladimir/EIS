@@ -2,7 +2,7 @@ import os
 from wsgiref.util import FileWrapper
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import auth
 from django.shortcuts import redirect
 from django.utils import timezone
@@ -21,8 +21,12 @@ def page_documents(request):
 		return render(request, 'index_public.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
 
 
-def page_document_view(request):
-	pass
+def page_document_view(request, pk):
+	if request.user.is_authenticated():
+		document = get_object_or_404(EIS_Document, pk=pk)
+		return render(request, 'view.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION, 'document': document})
+	else:
+		return render(request, 'index_public.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
 
 
 def page_document_edit(request):
