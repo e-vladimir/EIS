@@ -6,7 +6,7 @@ body {
 .content {
     padding-bottom: 90px;
     padding-top: 12px;
-    margin: 5px 5px 5px 200px;
+    margin: 5px 5px 5px 180px;
     }
 
 .footer {
@@ -22,15 +22,6 @@ body {
 .header {
     float: top;
     width: 100%;
-    }
-
-.eis_user {
-    font-weight: bold;
-    }
-
-.logout {
-    font-size: 0.8em;
-    font-weight: bold;
     }
 
 .menu {

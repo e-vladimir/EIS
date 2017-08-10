@@ -11,7 +11,7 @@
     <table rules="rows">
         {% regroup documents by category as categories %}
             {% for category in categories %}
-            <tr bgcolor="CCCCCC">
+            <tr bgcolor="CCCCFF">
                 <td><i class="fa fa-folder-o fa-fw" aria-hidden="true"></i>&nbsp;<b>{{ category.grouper | upper }}</b></td>
                 <td align="center">&nbsp;</td>
                 <td align="center">&nbsp;</td>
@@ -24,12 +24,13 @@
                         {{ document.date }}</td>
                         <td>
                         {% if document.file_pdf %}
-                            <a href="{{ document.file_pdf.url }}"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i> Скачать PDF</a><br>
+                            <a href="{{ document.file_pdf.url }}"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>PDF ({{ document.get_pdf_size }})</a><br>
                         {% endif %}
                         {% if document.file %}
-                            <a href="{{ document.file.url }}"><i class="fa fa-file-o fa-fw" aria-hidden="true"></i> Скачать файл</a>
+                            <a href="{{ document.file.url }}"><i class="fa fa-file-o fa-fw" aria-hidden="true"></i>{{ document.get_extension}} ({{ document.get_size }})</a>
                         {% endif %}
-                            &nbsp;
+
+                        &nbsp;
                         </td>
 
                         <td><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{ document.update_user }}<br>
