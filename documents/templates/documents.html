@@ -8,8 +8,6 @@
 </div>
 
 <div class="content">
-    <h1>Документы</h1>
-
     <table rules="rows">
         {% regroup documents by category as categories %}
             {% for category in categories %}
@@ -24,8 +22,16 @@
                     <tr>
                         <td><b><a href="/documents/view/{{ document.pk }}/">{{ document.name }}</a></b><br>
                         {{ document.date }}</td>
-                        <td><a href="{{ document.file_pdf.url }}"><i class="fa fa-search" aria-hidden="true"></i> Просмотр</a> &nbsp;<br>
-                        <a href="{{ document.file.url }}"><i class="fa fa-download" aria-hidden="true"></i> Скачать</a> &nbsp;</td>
+                        <td>
+                        {% if document.file_pdf %}
+                            <a href="{{ document.file_pdf.url }}"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i> Скачать PDF</a><br>
+                        {% endif %}
+                        {% if document.file %}
+                            <a href="{{ document.file.url }}"><i class="fa fa-file-o fa-fw" aria-hidden="true"></i> Скачать файл</a>
+                        {% endif %}
+                            &nbsp;
+                        </td>
+
                         <td><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{ document.update_user }}<br>
                         <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ document.update_date|date:"Y-m-d" }}</td>
                     </tr>

@@ -3,15 +3,6 @@
 <div class="menu">
     <table width="100%">
         {% include "menu.html" %}
-
-        <tr><td><hr></td></tr>
-
-        <tr><td><a href="{{ document.file_pdf.url }}"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i> Скачать PDF</a></td></tr>
-        <tr><td><a href="{{ document.file.url }}"><i class="fa fa-file-o fa-fw" aria-hidden="true"></i> Скачать файл</a></td></tr>
-
-        <tr><td><hr></td></tr>
-
-        <tr><td><a href="/documents/edit/{{ document.pk }}/"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Редактировать</a></td></tr>
     </table>
 </div>
 
@@ -24,7 +15,18 @@
         <tr height="30"><td><h3>Последние изменения &nbsp; </h3></td><td>{{ document.update_user }} ({{ document.update_date | date:"Y-m-d в H:m" }})</td></tr>
         <tr height="30"><td><h3>Примечание </h3></td><td>{{ document.note }}</td></tr>
 
+        <tr><td>&nbsp;</td></tr>
+
     </table>
+
+    {% if document.file_pdf %}
+        <a href="{{ document.file_pdf.url }}" class="btn btn-success">Скачать PDF</a>
+    {% endif %}
+    {% if document.file %}
+        <a href="{{ document.file.url }}" class="btn btn-primary">Скачать файл</a>
+    {% endif %}
+
+    <a href="/documents/edit/{{ document.pk }}/" class="btn btn-warning">Редактировать</a>
 
 </div>
 

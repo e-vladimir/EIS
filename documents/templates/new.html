@@ -10,6 +10,7 @@
     <h1>Новый документ</h1>
 
     <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+
         <table>
             <tr>
                 <td>Название</td>
@@ -52,10 +53,15 @@
                 <td>{{ form.note }}</td>
             </tr>
 
+            <tr><td colspan="3"><hr></td></tr>
         </table>
-        <button type="submit" class="save btn btn-default">Сохранить</button>
-    </form>
+        <button type="submit" class="save btn btn-success">Сохранить</button>
+        <a href="/documents/" class="save btn btn-primary">Отмена</a>
+
+        </form>
+
 </div>
+
 
 {% include "footer.html" %}
 {% include "end.html" %}

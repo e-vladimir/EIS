@@ -16,7 +16,14 @@ from .forms import DocumentForm
 def page_documents(request):
 	if request.user.is_authenticated():
 		documents = EIS_Document.objects.all().order_by("category", "name")
-		return render(request, 'documents.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION, 'documents': documents})
+
+		EIS_info = dict()
+		EIS_info['name'] = EIS_NAME
+		EIS_info['version'] = EIS_VERSION
+		EIS_info['title'] = "ДОКУМЕНТЫ"
+		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
+
+		return render(request, 'documents.html', {'EIS_info': EIS_info, 'documents': documents})
 	else:
 		return render(request, 'index_public.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
 
@@ -24,6 +31,7 @@ def page_documents(request):
 def page_document_view(request, pk):
 	if request.user.is_authenticated():
 		document = get_object_or_404(EIS_Document, pk=pk)
+
 		return render(request, 'view.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION, 'document': document})
 	else:
 		return render(request, 'index_public.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
