@@ -11,4 +11,5 @@ urlpatterns = [
 	url(r'^$', views.page_documents, name='page_documents'),
 	url(r'^new/', views.page_document_new, name='page_document_new'),
 	url(r'^view/(?P<pk>[0-9]+)/$', views.page_document_view, name='page_document_view'),
+	url(r'^edit/(?P<pk>[0-9]+)/$', views.page_document_edit, name='page_document_edit'),
 ]

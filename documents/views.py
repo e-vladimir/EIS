@@ -29,8 +29,26 @@ def page_document_view(request, pk):
 		return render(request, 'index_public.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
 
 
-def page_document_edit(request):
-	pass
+def page_document_edit(request, pk):
+	if request.user.is_authenticated():
+		document = get_object_or_404(EIS_Document, pk=pk)
+
+		if request.method == "POST":
+			form = DocumentForm(request.POST, request.FILES, instance=document)
+
+			if form.is_valid():
+				document = form.save(commit=False)
+				document.update_user = "{0} {1}".format(request.user.first_name, request.user.last_name)
+				document.update_date = timezone.now()
+
+				document.save()
+
+				return redirect('page_document_view', pk)
+		else:
+			form = DocumentForm(instance=document)
+			return render(request, 'new.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION, 'form': form})
+	else:
+		return render(request, 'index_public.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
 
 
 def page_document_new(request):
@@ -46,9 +64,6 @@ def page_document_new(request):
 				document.save()
 
 				return redirect('page_documents')
-			else:
-				print('Not valid!', form.errors)
-				return ""
 		else:
 			form = DocumentForm()
 			return render(request, 'new.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION, 'form': form})
