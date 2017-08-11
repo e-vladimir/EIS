@@ -1,0 +1,35 @@
+{% include "header.html" %}
+
+<div class="menu">
+    <table width="100%">
+        {% include "menu.html" %}
+        {% include "contacts_menu.html" %}
+    </table>
+</div>
+
+<div class="content">
+    <table rules="rows">
+        {% regroup contacts by organization as organizations %}
+            {% for organization in organizations %}
+            <tr bgcolor="DDDDDD">
+                <td colspan="5"><i class="fa fa-folder-o fa-fw" aria-hidden="true"></i>&nbsp;<b>{{ organization.grouper | upper }}</b></td>
+            </tr>
+
+                {% for contact in organization.list %}
+                <tr>
+                    <td width="250px">{{ contact.post }} &nbsp;</td>
+                    <td><b><a href="/contacts/view/{{ contact.pk }}/">{{ contact.name }} &nbsp;</a></b></td>
+                    <td>{{ contact.phone }} <br>
+                    {{ contact.phone_mobile }} &nbsp;</td>
+                    <td>{{ contact.email }} &nbsp;</td>
+                </tr>
+                {% endfor %}
+
+            <tr><td>&nbsp;</td></tr>
+            {% endfor %}
+    </table>
+
+</div>
+
+{% include "footer.html" %}
+{% include "end.html" %}
