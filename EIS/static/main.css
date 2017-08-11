@@ -34,7 +34,6 @@ body {
 
 .menu div {
     padding: 2px;
-    vertical-align: middle;
     }
 
 .menu a {
@@ -64,7 +63,7 @@ h1 {
 h2 {
     font-size: 1.2em;
     font-weight: bold;
-    margin: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 0px;
     }
 
 h3 {

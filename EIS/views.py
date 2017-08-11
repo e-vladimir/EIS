@@ -4,6 +4,7 @@ from wsgiref.util import FileWrapper
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.contrib import auth
+from django.contrib.admin.models import LogEntry
 
 from EIS import settings
 from EIS.global_info import *
@@ -13,7 +14,7 @@ def page_index(request):
 	EIS_info = dict()
 	EIS_info['name'] = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
-	EIS_info['title'] = "Единая Информационная Система"
+	EIS_info['title'] = "ЕДИНАЯ ИНФОРМАЦИОННАЯ СИСТЕМА"
 
 	if request.user.is_authenticated():
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
