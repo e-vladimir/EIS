@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import EIS_Document
 
-# Register your models here.
+admin.site.register(EIS_Document)
