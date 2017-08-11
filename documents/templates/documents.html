@@ -11,30 +11,28 @@
     <table rules="rows">
         {% regroup documents by category as categories %}
             {% for category in categories %}
-            <tr bgcolor="CCCCFF">
-                <td><i class="fa fa-folder-o fa-fw" aria-hidden="true"></i>&nbsp;<b>{{ category.grouper | upper }}</b></td>
-                <td align="center">&nbsp;</td>
-                <td align="center">&nbsp;</td>
-                <td align="center">&nbsp;</td>
+            <tr bgcolor="DDDDDD">
+                <td colspan="5"><i class="fa fa-folder-o fa-fw" aria-hidden="true"></i>&nbsp;<b>{{ category.grouper | upper }}</b></td>
             </tr>
 
                 {% for document in category.list %}
                     <tr>
-                        <td><b><a href="/documents/view/{{ document.pk }}/">{{ document.name }}</a></b><br>
-                        {{ document.date }}</td>
+                        <td><b><a href="/documents/view/{{ document.pk }}/">{{ document.name }}</a></b> &nbsp;</td>
+                        <td><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>{{ document.date }} &nbsp;</td>
                         <td>
-                        {% if document.file_pdf %}
-                            <a href="{{ document.file_pdf.url }}"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>PDF ({{ document.get_pdf_size }})</a><br>
-                        {% endif %}
-                        {% if document.file %}
-                            <a href="{{ document.file.url }}"><i class="fa fa-file-o fa-fw" aria-hidden="true"></i>{{ document.get_extension}} ({{ document.get_size }})</a>
-                        {% endif %}
-
-                        &nbsp;
+                            {% if document.file_pdf %}
+                                <a href="{{ document.file_pdf.url }}"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>PDF ({{ document.get_pdf_size }})</a>
+                            {% endif %}
+                            &nbsp;
+                        </td>
+                        <td>
+                            {% if document.file %}
+                                <a href="{{ document.file.url }}"><i class="fa fa-file-o fa-fw" aria-hidden="true"></i>{{ document.get_extension}} ({{ document.get_size }})</a>
+                            {% endif %}
+                            &nbsp;
                         </td>
 
-                        <td><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{ document.update_user }}<br>
-                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ document.update_date|date:"Y-m-d" }}</td>
+                        <td><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{ document.update_user }} ({{ document.update_date|date:"d E Y" }})</td>
                     </tr>
             {% endfor %}
 

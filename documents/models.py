@@ -16,15 +16,24 @@ class EIS_Document(models.Model):
 	update_user = models.CharField(max_length=200, default="Аноним")
 	update_date = models.DateTimeField(null=True, blank=True)
 
-	def get_pdf_size(self):
-		if self.file_pdf is not None:
-			try:
-				size = self.file_pdf.size
+	def __str__(self):
+		return "{0}/{1}".format(self.category, self.name)
 
-				if size > 1000:
-					return "{0} Kb".format(size // 1000)
-				elif size > 1000000:
+	def delete(self, using=None, keep_parents=False):
+		self.file.delete()
+		self.file_pdf.delete()
+
+		super(EIS_Document, self).delete(using, keep_parents)
+
+	def file_size(self, in_file):
+		if in_file is not None:
+			try:
+				size = in_file.size
+
+				if size > 1000000:
 					return "{0} Mb".format(size // 1000000)
+				elif size > 1000:
+					return "{0} Kb".format(size // 1000)
 				else:
 					return "{0} b".format(size)
 
@@ -32,23 +41,12 @@ class EIS_Document(models.Model):
 				return "Ошибка"
 		else:
 			return ""
+
+	def get_pdf_size(self):
+		return self.file_size(self.file_pdf)
 
 	def get_size(self):
-		if self.file_pdf is not None:
-			try:
-				size = self.file_pdf.size
-
-				if size > 1000:
-					return "{0} Kb".format(size // 1000)
-				elif size > 1000000:
-					return "{0} Mb".format(size // 1000000)
-				else:
-					return "{0} b".format(size)
-
-			except:
-				return "Ошибка"
-		else:
-			return ""
+		return self.file_size(self.file)
 
 	def get_extension(self):
 		if self.file is not None:

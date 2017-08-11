@@ -10,10 +10,17 @@ from EIS.global_info import *
 
 
 def page_index(request):
+	EIS_info = dict()
+	EIS_info['name'] = EIS_NAME
+	EIS_info['version'] = EIS_VERSION
+	EIS_info['title'] = "Единая Информационная Система"
+
 	if request.user.is_authenticated():
-		return render(request, 'index_private.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
+		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
+
+		return render(request, 'index_private.html', {'EIS_info': EIS_info})
 	else:
-		return render(request, 'index_public.html', {'EIS_NAME': EIS_NAME, 'EIS_VERSION': EIS_VERSION})
+		return render(request, 'index_public.html', {'EIS_info': EIS_info})
 
 
 def logout(request):
