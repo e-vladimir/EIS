@@ -17,11 +17,11 @@
 
                 {% for contact in organization.list %}
                 <tr>
-                    <td width="250px">{{ contact.post }} &nbsp;</td>
-                    <td><b><a href="/contacts/view/{{ contact.pk }}/">{{ contact.name }} &nbsp;</a></b></td>
-                    <td>{{ contact.phone }} <br>
+                    <td>{{ contact.post }} &nbsp;</td>
+                    <td width="300"><b><a href="/contacts/view/{{ contact.pk }}/">{{ contact.name }} &nbsp;</a></b></td>
+                    <td width="190">{{ contact.phone }} <br>
                     {{ contact.phone_mobile }} &nbsp;</td>
-                    <td>{{ contact.email }} &nbsp;</td>
+                    <td width="200"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a> &nbsp;</td>
                 </tr>
                 {% endfor %}
 

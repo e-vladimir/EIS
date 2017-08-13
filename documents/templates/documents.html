@@ -17,22 +17,22 @@
 
                 {% for document in category.list %}
                     <tr>
-                        <td><b><a href="/documents/view/{{ document.pk }}/">{{ document.name }}</a></b> &nbsp;</td>
-                        <td><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>{{ document.date }} &nbsp;</td>
-                        <td>
+                        <td width><b><a href="/documents/view/{{ document.pk }}/">{{ document.name }}</a></b> &nbsp;</td>
+                        <td width="120px"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>{{ document.date }} &nbsp;</td>
+                        <td width="120px">
                             {% if document.file_pdf %}
                                 <a href="{{ document.file_pdf.url }}"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>PDF ({{ document.get_pdf_size }})</a>
                             {% endif %}
                             &nbsp;
                         </td>
-                        <td>
+                        <td width="120px">
                             {% if document.file %}
                                 <a href="{{ document.file.url }}"><i class="fa fa-file-o fa-fw" aria-hidden="true"></i>{{ document.get_extension}} ({{ document.get_size }})</a>
                             {% endif %}
                             &nbsp;
                         </td>
 
-                        <td><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{ document.update_user }} ({{ document.update_date|date:"d E Y" }})</td>
+                        <td width="280px"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{ document.update_user }} ({{ document.update_date|date:"d E Y" }})</td>
                     </tr>
             {% endfor %}
 

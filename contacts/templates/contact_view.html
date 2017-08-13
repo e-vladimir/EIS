@@ -15,9 +15,9 @@
         <tr><td colspan="2"><hr></td></tr>
         <tr height="30"><td><h3>Телефон рабочий </h3></td><td>{{ contact.phone }}</td></tr>
         <tr height="30"><td><h3>Телефон мобильный </h3></td><td>{{ contact.phone_mobile }}</td></tr>
-        <tr height="30"><td><h3>e-Mail </h3></td><td>{{ contact.email }}</td></tr>
+        <tr height="30"><td><h3>e-Mail </h3></td><td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td></tr>
         <tr><td colspan="2"><hr></td></tr>
-        <tr height="30"><td><h3>Примечание </h3></td><td>{{ document.note }}</td></tr>
+        <tr height="30"><td><h3>Примечание </h3></td><td>{{ contact.note }}</td></tr>
 
         <tr><td>&nbsp</td></tr>
 
