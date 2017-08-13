@@ -1,33 +1,47 @@
 {% include "header.html" %}
 
-<div class="menu">
-    <table width="100%">
-        {% include "menu.html" %}
-    </table>
-</div>
+<table width="100%">
+    <tr>
+        <td width="165px" valign="top">{% include "docs_menu.html" %}</td>
+        </td>
+        <td valign="top">
+            <div class="content">
+            <table cellspacing="10px">
+                <tr>
+                    <td align="right"><span class="field">Дата утверждения</span></td>
+                    <td>{{ document.date }}</td>
+                </tr>
+                <tr>
+                    <td align="right"><span class="field">Последние изменения</span></td>
+                    <td>{{ document.update_user }} ({{ document.update_date|date:"d E Y" }})</td>
+                </tr>
+                <tr><td colspan="2"><hr></td></tr>
+                {% if document.file_pdf %}
+                    <tr>
+                        <td align="right"><a href="{{ document.file_pdf.url }}" class="pdf">PDF</a></td>
+                        <td>{{ document.get_pdf_size }}</td>
+                    </tr>
+                {% endif %}
+                {% if document.file %}
+                    <tr>
+                        <td align="right"><a href="{{ document.file.url }}" class="file">{{ document.get_extension }}</a></td>
+                        <td>{{ document.get_size }}</td>
+                    </tr>
+                {% endif %}
+                <tr><td colspan="2"><hr></td></tr>
+                <tr>
+                    <td align="right"><span class="field">Примечание</span></td>
+                    <td>{{ document.note }}</td>
+                </tr>
+                <tr><td colspan="2"><hr></td></tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><a href="/documents/edit/{{ document.pk }}/" class="edit">Редактировать</a></td>
+                </tr>
+            </table>
+            </div>
+        </td>
+    </tr>
+</table>
 
-<div class="content">
-    <h1>{{ document.name }}</h1>
-
-    <table cellspacing="15px">
-        <tr height="30"><td><h3>Дата утверждения </h3></td><td>{{ document.date }}</td></tr>
-        <tr height="30"><td><h3>Последние изменения &nbsp; </h3></td><td>{{ document.update_user }} ({{ document.update_date | date:"d E Y в H:m" }})</td></tr>
-        <tr height="30"><td><h3>Примечание </h3></td><td>{{ document.note }}</td></tr>
-
-        <tr><td>&nbsp;</td></tr>
-
-    </table>
-
-    {% if document.file_pdf %}
-        <a href="{{ document.file_pdf.url }}" class="btn btn-danger">PDF ({{ document.get_pdf_size }})</a>
-    {% endif %}
-    {% if document.file %}
-        <a href="{{ document.file.url }}" class="btn btn-primary">{{ document.get_extension}} ({{ document.get_size }})</a>
-    {% endif %}
-
-    <a href="/documents/edit/{{ document.pk }}/" class="btn btn-default">Редактировать</a>
-
-</div>
-
-{% include "footer.html" %}
 {% include "end.html" %}

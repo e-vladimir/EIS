@@ -1,35 +1,47 @@
 {% include "header.html" %}
 
-<div class="menu">
-    <table width="100%">
-        {% include "menu.html" %}
-        {% include "contacts_menu.html" %}
-    </table>
-</div>
+<table width="100%">
+    <tr>
+        <td width="165px" valign="top">{% include "contacts_menu.html" %}</td>
+        <td valign="top">
+            <div class="content">
+            <table width="100%">
+                {% regroup contacts by organization as organizations %}
+                    {% for organization in organizations %}
+                    <tr><td class="group" colspan="5">{{ organization.grouper }}</td></tr>
 
-<div class="content">
-    <table rules="rows">
-        {% regroup contacts by organization as organizations %}
-            {% for organization in organizations %}
-            <tr bgcolor="DDDDDD">
-                <td colspan="5"><i class="fa fa-folder-o fa-fw" aria-hidden="true"></i>&nbsp;<b>{{ organization.grouper | upper }}</b></td>
-            </tr>
+                    {% for contact in organization.list %}
+                    <tr>
+                        <td width="40%" class="first_col"><a href="/contacts/view/{{ contact.pk }}/" class="name">{{contact.name}}</a><br><span class="small">{{ contact.post }}</span></td>
+                        <td class="note">{{ contact.note}}</td>
+                        <td width="150px" align="center">{% if contact.phone %}
+                            <span class="numbers">{{ contact.phone }}</span><br><span class="small">Рабочий</span>
+                            {% else %}
+                            &nbsp;
+                            {% endif %}
+                        </td>
+                        <td width="150px" align="center">{% if contact.phone_mobile %}
+                                <span class="numbers">{{ contact.phone_mobile }}</span><br><span class="small">Мобильный</span>
+                            {% else %}
+                            &nbsp;
+                            {% endif %}
+                        </td>
+                        <td width="150px" align="center">{% if contact.email %}
+                            <a href="mailto:{{ contact.email }}" class="file">{{ contact.email }}</a><br><span class="small">e-Mail</span>
+                            {% else %}
+                            &nbsp;
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr><td colspan="5"><hr></td></tr>
 
-                {% for contact in organization.list %}
-                <tr>
-                    <td width="250px">{{ contact.post }} &nbsp;</td>
-                    <td><b><a href="/contacts/view/{{ contact.pk }}/">{{ contact.name }} &nbsp;</a></b></td>
-                    <td>{{ contact.phone }} <br>
-                    {{ contact.phone_mobile }} &nbsp;</td>
-                    <td>{{ contact.email }} &nbsp;</td>
-                </tr>
+                    {% endfor %}
+                <tr><td>&nbsp;</td></tr>
                 {% endfor %}
+            </table>
+            </div>
+        </td>
+    </tr>
+</table>
 
-            <tr><td>&nbsp;</td></tr>
-            {% endfor %}
-    </table>
-
-</div>
-
-{% include "footer.html" %}
 {% include "end.html" %}

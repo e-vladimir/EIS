@@ -1,74 +1,56 @@
 {% include "header.html" %}
 
-<div class="menu">
-    <table width="100%">
-        {% include "menu.html" %}
-    </table>
-</div>
+<table width="100%">
+    <tr>
+        <td width="165px" valign="top">{% include "contacts_menu.html" %}</td>
+        </td>
+        <td valign="top">
+            <div class="content">
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <table cellspacing="10px">
+                        <tr>
+                            <td align="right"><span class="field">Фамилия Имя Отчество</span></td>
+                            <td>{{ form.name }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Должность</span></td>
+                            <td>{{ form.post }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Организация</span></td>
+                            <td>{{ form.organization }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+                        <tr>
+                            <td align="right"><span class="field">Телефон рабочий</span></td>
+                            <td>{{ form.phone }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Телефон мобильный</span></td>
+                            <td>{{ form.phone_mobile }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">e-mail</span></td>
+                            <td>{{ form.email }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+                        <tr>
+                            <td align="right"><span class="field">Примечание</span></td>
+                            <td>{{ form.note }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <button type="submit" class="btn">Сохранить</button>&nbsp;
+                                <a href="/contacts/" class="cancel">Отмена</button></a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
 
-<div class="content">
-    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-
-        <table>
-            <tr>
-                <td>Фамилия Имя Отчество</td>
-                <td>&nbsp;</td>
-                <td>{{ form.name }}</td>
-            </tr>
-
-            <tr><td colspan="3"><hr></td></tr>
-
-            <tr>
-                <td>Организация</td>
-                <td>&nbsp;</td>
-                <td>{{ form.organization }}</td>
-            </tr>
-            <tr>
-                <td>Должность</td>
-                <td>&nbsp;</td>
-                <td>{{ form.post }}</td>
-            </tr>
-
-
-            <tr><td colspan="3"><hr></td></tr>
-
-            <tr>
-                <td>Рабочий телефон</td>
-                <td>&nbsp;</td>
-                <td>{{ form.phone }}</td>
-            </tr>
-
-            <tr>
-                <td>Мобильный телефон</td>
-                <td>&nbsp;</td>
-                <td>{{ form.phone_mobile }}</td>
-            </tr>
-
-            <tr><td colspan="3"><hr></td></tr>
-
-            <tr>
-                <td>e-Mail</td>
-                <td>&nbsp;</td>
-                <td>{{ form.email }}</td>
-            </tr>
-
-            <tr><td colspan="3"><hr></td></tr>
-
-            <tr>
-                <td>Примечание</td>
-                <td>&nbsp;</td>
-                <td>{{ form.note }}</td>
-            </tr>
-
-            <tr><td colspan="3"><hr></td></tr>
-        </table>
-        <button type="submit" class="save btn btn-success">Сохранить</button>
-        <a href="/documents/" class="save btn btn-primary">Отмена</button></a>
-
-        </form>
-
-</div>
-
-
-{% include "footer.html" %}
 {% include "end.html" %}

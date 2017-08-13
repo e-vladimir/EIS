@@ -1,46 +1,43 @@
 {% include "header.html" %}
 
-<div class="menu">
-    <table width="100%">
-        {% include "menu.html" %}
-        {% include "docs_menu.html" %}
-    </table>
-</div>
+<table width="100%">
+    <tr>
+        <td width="165px" valign="top">{% include "docs_menu.html" %}</td>
+        <td valign="top">
+            <div class="content">
+            <table width="100%">
+                {% regroup documents by category as categories %}
+                    {% for category in categories %}
+                    <tr><td class="group" colspan="5">{{ category.grouper }}</td></tr>
 
-<div class="content">
-    <table rules="rows">
-        {% regroup documents by category as categories %}
-            {% for category in categories %}
-            <tr bgcolor="DDDDDD">
-                <td colspan="5"><i class="fa fa-folder-o fa-fw" aria-hidden="true"></i>&nbsp;<b>{{ category.grouper | upper }}</b></td>
-            </tr>
-
-                {% for document in category.list %}
+                    {% for document in category.list %}
                     <tr>
-                        <td><b><a href="/documents/view/{{ document.pk }}/">{{ document.name }}</a></b> &nbsp;</td>
-                        <td><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>{{ document.date }} &nbsp;</td>
-                        <td>
-                            {% if document.file_pdf %}
-                                <a href="{{ document.file_pdf.url }}"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>PDF ({{ document.get_pdf_size }})</a>
-                            {% endif %}
+                        <td width="40%" class="first_col"><a href="/documents/view/{{ document.pk }}/" class="name">{{document.name}}</a><br><span class="small">{{ document.date }}</span></td>
+                        <td width="50px" align="center">{% if document.file_pdf %}
+                                <a href="{{ document.file_pdf.url }}" class="pdf">PDF</a><br><span class="small">{{ document.get_pdf_size }}</span>
+                            {% else %}
                             &nbsp;
-                        </td>
-                        <td>
-                            {% if document.file %}
-                                <a href="{{ document.file.url }}"><i class="fa fa-file-o fa-fw" aria-hidden="true"></i>{{ document.get_extension}} ({{ document.get_size }})</a>
                             {% endif %}
-                            &nbsp;
                         </td>
-
-                        <td><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{ document.update_user }} ({{ document.update_date|date:"d E Y" }})</td>
+                        <td width="50px" align="center">{% if document.file %}
+                                <a href="{{ document.file.url }}" class="file">{{ document.get_extension }}</a><br><span class="small">{{ document.get_size }}</span>
+                            {% else %}
+                            &nbsp;
+                            {% endif %}
+                        </td>
+                        <td class="note">{{ document.note}}</td>
+                        <td align="right" class="last_col" width="150px"><span class="user_update">{{ document.update_user }}</span><br><span class="small">{{ document.update_date|date:"d E Y" }}</span></td>
                     </tr>
-            {% endfor %}
+                    <tr><td colspan="5"><hr></td></tr>
 
-        <tr><td>&nbsp;</td></tr>
-        {% endfor %}
-    </table>
+                    {% endfor %}
 
-</div>
+                <tr><td>&nbsp;</td></tr>
+                {% endfor %}
+            </table>
+            </div>
+        </td>
+    </tr>
+</table>
 
-{% include "footer.html" %}
 {% include "end.html" %}

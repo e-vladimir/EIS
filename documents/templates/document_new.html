@@ -1,65 +1,52 @@
 {% include "header.html" %}
 
-<div class="menu">
-    <table width="100%">
-        {% include "menu.html" %}
-    </table>
-</div>
+<table width="100%">
+    <tr>
+        <td width="165px" valign="top">{% include "docs_menu.html" %}</td>
+        </td>
+        <td valign="top">
+            <div class="content">
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <table cellspacing="10px">
+                        <tr>
+                            <td align="right"><span class="field">Название документа</span></td>
+                            <td>{{ form.name }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Категория</span></td>
+                            <td>{{ form.category }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Дата утверждения</span></td>
+                            <td>{{ form.date }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+                        <tr>
+                            <td align="right"><span class="field">PDF</span></td>
+                            <td>{{ form.file_pdf }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Файл</span></td>
+                            <td>{{ form.file }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+                        <tr>
+                            <td align="right"><span class="field">Примечание</span></td>
+                            <td>{{ form.note }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <button type="submit" class="btn">Сохранить</button>&nbsp;
+                                <a href="/documents/" class="cancel">Отмена</button></a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
 
-<div class="content">
-    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-
-        <table>
-            <tr>
-                <td>Название</td>
-                <td>&nbsp;</td>
-                <td>{{ form.name }}</td>
-            </tr>
-            <tr>
-                <td>Дата утверждения</td>
-                <td>&nbsp;</td>
-                <td>{{ form.date }}</td>
-            </tr>
-
-
-            <tr><td colspan="3"><hr></td></tr>
-
-            <tr>
-                <td>Категория документа</td>
-                <td>&nbsp;</td>
-                <td>{{ form.category }}</td>
-            </tr>
-
-            <tr><td colspan="3"><hr></td></tr>
-
-            <tr>
-                <td>PDF-версия</td>
-                <td>&nbsp;</td>
-                <td>{{ form.file_pdf }}</td>
-            </tr>
-            <tr>
-                <td>Файл</td>
-                <td>&nbsp;</td>
-                <td>{{ form.file }}</td>
-            </tr>
-
-            <tr><td colspan="3"><hr></td></tr>
-
-            <tr>
-                <td>Примечание</td>
-                <td>&nbsp;</td>
-                <td>{{ form.note }}</td>
-            </tr>
-
-            <tr><td colspan="3"><hr></td></tr>
-        </table>
-        <button type="submit" class="save btn btn-success">Сохранить</button>
-        <a href="/documents/" class="save btn btn-primary">Отмена</button></a>
-
-        </form>
-
-</div>
-
-
-{% include "footer.html" %}
 {% include "end.html" %}

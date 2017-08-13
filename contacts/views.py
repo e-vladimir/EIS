@@ -12,7 +12,7 @@ def page_contacts(request):
 	if request.user.is_authenticated():
 		contacts = EIS_Contact.objects.all().order_by("organization", "post", "name")
 
-		EIS_info['title'] = "ВНЕШНИЕ КОНТАКТЫ"
+		EIS_info['title'] = "Список внешних контактов"
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
 		return render(request, 'contacts.html', {'EIS_info': EIS_info, 'contacts': contacts})
@@ -28,7 +28,8 @@ def page_contact_view(request, pk):
 	if request.user.is_authenticated():
 		contact = get_object_or_404(EIS_Contact, pk=pk)
 
-		EIS_info['title'] = "ВНЕШНИЕ КОНТАКТЫ / {0}".format(contact.name)
+		EIS_info['title'] = contact.name
+		EIS_info['subtitle'] = "{0}/{1}".format(contact.organization, contact.post)
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
 		return render(request, 'contact_view.html', {'EIS_info': EIS_info, 'contact': contact})
@@ -44,7 +45,8 @@ def page_contact_edit(request, pk):
 	if request.user.is_authenticated():
 		contact = get_object_or_404(EIS_Contact, pk=pk)
 
-		EIS_info['title'] = "ВНЕШНИЕ КОНТАКТЫ / " + contact.name
+		EIS_info['title'] = contact.name
+		EIS_info['subtitle'] = "{0}/{1}".format(contact.organization, contact.post)
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
 		if request.method == "POST":
@@ -67,7 +69,7 @@ def page_contact_new(request):
 	EIS_info['version'] = EIS_VERSION
 
 	if request.user.is_authenticated():
-		EIS_info['title'] = "ВНЕШНИЕ КОНТАКТЫ / Новый контакт"
+		EIS_info['title'] = "Новый контакт"
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
 		if request.method == "POST":
