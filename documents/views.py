@@ -40,7 +40,7 @@ def page_document_view(request, pk):
 		EIS_info['title'] = "ДОКУМЕНТЫ / " + document.category
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
-		return render(request, 'view.html', {'EIS_info': EIS_info, 'document': document})
+		return render(request, 'document_view.html', {'EIS_info': EIS_info, 'document': document})
 	else:
 		return render(request, 'index_public.html', {'EIS_info': EIS_info})
 
@@ -69,7 +69,7 @@ def page_document_edit(request, pk):
 				return redirect('page_document_view', pk)
 		else:
 			form = DocumentForm(instance=document)
-			return render(request, 'new.html', {'EIS_info': EIS_info, 'form': form})
+			return render(request, 'document_new.html', {'EIS_info': EIS_info, 'form': form})
 	else:
 		return render(request, 'index_public.html', {'EIS_info': EIS_info})
 
@@ -96,6 +96,6 @@ def page_document_new(request):
 				return redirect('page_documents')
 		else:
 			form = DocumentForm()
-			return render(request, 'new.html', {'EIS_info': EIS_info, 'form': form})
+			return render(request, 'document_new.html', {'EIS_info': EIS_info, 'form': form})
 	else:
 		return render(request, 'index_public.html', {'EIS_info': EIS_info})

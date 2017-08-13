@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^media/file/(?P<filename>.*)$', views.file_download, name="file_download"),
     url(r'^admin/logout/', views.logout),
     url(r'^documents/', include('documents.urls')),
+    url(r'^contacts/', include('contacts.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'', views.page_index),
 ]
