@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 	'EIS',
 	'documents',
 	'contacts',
+	'workers',
 ]
 
 MIDDLEWARE = [

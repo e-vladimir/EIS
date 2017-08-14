@@ -6,48 +6,43 @@
         </td>
         <td valign="top">
             <div class="content">
-                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-                    <table cellspacing="10px">
+                <table cellspacing="10px">
                         <tr>
                             <td align="right"><span class="field">Фамилия Имя Отчество</span></td>
-                            <td>{{ form.name }}</td>
+                            <td>{{ worker.name }}</td>
                         </tr>
                         <tr>
                             <td align="right"><span class="field">Должность</span></td>
-                            <td>{{ form.post }}</td>
+                            <td>{{ worker.post }}</td>
                         </tr>
                         <tr>
-                            <td align="right"><span class="field">Организация</span></td>
-                            <td>{{ form.organization }}</td>
+                            <td align="right"><span class="field">Категория сотрудников</span></td>
+                            <td>{{ worker.category }}</td>
                         </tr>
                         <tr><td colspan="2"><hr></td></tr>
                         <tr>
                             <td align="right"><span class="field">Телефон рабочий</span></td>
-                            <td>{{ form.phone }}</td>
+                            <td>{{ worker.phone }}</td>
                         </tr>
                         <tr>
                             <td align="right"><span class="field">Телефон мобильный</span></td>
-                            <td>{{ form.phone_mobile }}</td>
+                            <td>{{ worker.phone_mobile }}</td>
                         </tr>
                         <tr>
                             <td align="right"><span class="field">e-mail</span></td>
-                            <td>{{ form.email }}</td>
+                            <td>{{ worker.email }}</td>
                         </tr>
                         <tr><td colspan="2"><hr></td></tr>
                         <tr>
                             <td align="right"><span class="field">Примечание</span></td>
-                            <td>{{ form.note }}</td>
+                            <td>{{ worker.note }}</td>
                         </tr>
                         <tr><td colspan="2"><hr></td></tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>
-                                <button type="submit" class="btn">Сохранить</button>&nbsp;
-                                <a href="/contacts/" class="cancel">Отмена</button></a>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><a href="/workers/edit/{{ worker.pk }}/" class="edit">Редактировать</a></td>
+                    </tr>
+                </table>
             </div>
         </td>
     </tr>

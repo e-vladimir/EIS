@@ -5,9 +5,10 @@ from .models import EIS_Contact
 
 
 def page_contacts(request):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Contacts"
 
 	if request.user.is_authenticated():
 		contacts = EIS_Contact.objects.all().order_by("organization", "post", "name")
@@ -22,8 +23,9 @@ def page_contacts(request):
 
 def page_contact_view(request, pk):
 	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Contacts"
 
 	if request.user.is_authenticated():
 		contact = get_object_or_404(EIS_Contact, pk=pk)
@@ -38,9 +40,10 @@ def page_contact_view(request, pk):
 
 
 def page_contact_edit(request, pk):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Contacts"
 
 	if request.user.is_authenticated():
 		contact = get_object_or_404(EIS_Contact, pk=pk)
@@ -64,9 +67,10 @@ def page_contact_edit(request, pk):
 
 
 def page_contact_new(request):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Contacts"
 
 	if request.user.is_authenticated():
 		EIS_info['title'] = "Новый контакт"
