@@ -1,0 +1,47 @@
+{% include "header.html" %}
+
+<table width="100%">
+    <tr>
+        <td width="165px" valign="top">{% include "contacts_menu.html" %}</td>
+        <td valign="top">
+            <div class="content">
+            <table width="100%">
+                {% regroup contacts by organization as organizations %}
+                    {% for organization in organizations %}
+                    <tr><td class="group" colspan="5">{{ organization.grouper }}</td></tr>
+
+                    {% for contact in organization.list %}
+                    <tr>
+                        <td width="40%" class="first_col"><a href="/contacts/view/{{ contact.pk }}/" class="name">{{contact.name}}</a><br><span class="small">{{ contact.post }}</span></td>
+                        <td class="note">{{ contact.note}}</td>
+                        <td width="150px" align="center">{% if contact.phone %}
+                            <span class="numbers">{{ contact.phone }}</span><br><span class="small">Рабочий</span>
+                            {% else %}
+                            &nbsp;
+                            {% endif %}
+                        </td>
+                        <td width="150px" align="center">{% if contact.phone_mobile %}
+                                <span class="numbers">{{ contact.phone_mobile }}</span><br><span class="small">Мобильный</span>
+                            {% else %}
+                            &nbsp;
+                            {% endif %}
+                        </td>
+                        <td width="150px" align="center">{% if contact.email %}
+                            <a href="mailto:{{ contact.email }}" class="file">{{ contact.email }}</a><br><span class="small">e-Mail</span>
+                            {% else %}
+                            &nbsp;
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr><td colspan="5"><hr></td></tr>
+
+                    {% endfor %}
+                <tr><td>&nbsp;</td></tr>
+                {% endfor %}
+            </table>
+            </div>
+        </td>
+    </tr>
+</table>
+
+{% include "end.html" %}
