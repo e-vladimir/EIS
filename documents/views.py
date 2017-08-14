@@ -14,9 +14,10 @@ from .forms import DocumentForm
 
 
 def page_documents(request):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Documents"
 
 	if request.user.is_authenticated():
 		documents = EIS_Document.objects.all().order_by("category", "name")
@@ -30,9 +31,10 @@ def page_documents(request):
 
 
 def page_document_view(request, pk):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Documents"
 
 	if request.user.is_authenticated():
 		document = get_object_or_404(EIS_Document, pk=pk)
@@ -47,9 +49,10 @@ def page_document_view(request, pk):
 
 
 def page_document_edit(request, pk):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Documents"
 
 	if request.user.is_authenticated():
 		document = get_object_or_404(EIS_Document, pk=pk)
@@ -77,9 +80,10 @@ def page_document_edit(request, pk):
 
 
 def page_document_new(request):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Documents"
 
 	if request.user.is_authenticated():
 		EIS_info['title'] = "Новый документ"

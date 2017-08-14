@@ -5,9 +5,10 @@ from .models import EIS_Worker
 
 
 def page_workers(request):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Workers"
 
 	if request.user.is_authenticated():
 		workers = EIS_Worker.objects.all().order_by("category", "post", "name")
@@ -21,9 +22,10 @@ def page_workers(request):
 
 
 def page_worker_view(request, pk):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Workers"
 
 	if request.user.is_authenticated():
 		worker = get_object_or_404(EIS_Worker, pk=pk)
@@ -38,9 +40,10 @@ def page_worker_view(request, pk):
 
 
 def page_worker_edit(request, pk):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Workers"
 
 	if request.user.is_authenticated():
 		worker = get_object_or_404(EIS_Worker, pk=pk)
@@ -64,8 +67,8 @@ def page_worker_edit(request, pk):
 
 
 def page_worker_new(request):
-	EIS_info = dict()
-	EIS_info['name'] = EIS_NAME
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
 
 	if request.user.is_authenticated():

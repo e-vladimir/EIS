@@ -2,45 +2,45 @@
 
 <table width="100%">
     <tr>
-        <td width="165px" valign="top">{% include "contacts_menu.html" %}</td>
+        <td width="165px" valign="top">{% include "menu.html" %}</td>
         </td>
         <td valign="top">
             <div class="content">
                 <table cellspacing="10px">
                         <tr>
                             <td align="right"><span class="field">Фамилия Имя Отчество</span></td>
-                            <td>{{ contact.name }}</td>
+                            <td>{{ worker.name }}</td>
                         </tr>
                         <tr>
                             <td align="right"><span class="field">Должность</span></td>
-                            <td>{{ contact.post }}</td>
+                            <td>{{ worker.post }}</td>
                         </tr>
                         <tr>
-                            <td align="right"><span class="field">Организация</span></td>
-                            <td>{{ contact.organization }}</td>
+                            <td align="right"><span class="field">Категория сотрудников</span></td>
+                            <td>{{ worker.category }}</td>
                         </tr>
                         <tr><td colspan="2"><hr></td></tr>
                         <tr>
                             <td align="right"><span class="field">Телефон рабочий</span></td>
-                            <td>{{ contact.phone }}</td>
+                            <td>{{ worker.phone }}</td>
                         </tr>
                         <tr>
                             <td align="right"><span class="field">Телефон мобильный</span></td>
-                            <td>{{ contact.phone_mobile }}</td>
+                            <td>{{ worker.phone_mobile }}</td>
                         </tr>
                         <tr>
                             <td align="right"><span class="field">e-mail</span></td>
-                            <td>{{ contact.email }}</td>
+                            <td>{{ worker.email }}</td>
                         </tr>
                         <tr><td colspan="2"><hr></td></tr>
                         <tr>
                             <td align="right"><span class="field">Примечание</span></td>
-                            <td>{{ contact.note }}</td>
+                            <td>{{ worker.note }}</td>
                         </tr>
                         <tr><td colspan="2"><hr></td></tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <td><a href="/contacts/edit/{{ contact.pk }}/" class="edit">Редактировать</a></td>
+                        <td><a href="/workers/edit/{{ worker.pk }}/" class="edit">Редактировать</a></td>
                     </tr>
                 </table>
             </div>

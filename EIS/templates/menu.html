@@ -1,10 +1,48 @@
 <div class="menu">
     <table>
-        <tr>
-            <td height="20px" valign="bottom"><a href="/documents/" class="module">ДОКУМЕНТЫ</a></td>
-        </tr>
-        <tr>
-            <td><a href="/contacts/" class="module">КОНТАКТЫ</a></td>
-        </tr>
+        <tr><td height="3px"></td></tr>
+
+        {% if EIS_info.module == "Documents" %}
+            <tr>
+                <td><a href="/documents/" class="module_current"><i class="fa fa-angle-double-right fw" aria-hidden="true"></i> Документы</a></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;<a href="/documents/new/" class="action">Добавить документ</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td><a href="/documents/" class="module">Документы</a></td>
+            </tr>
+        {% endif %}
+
+        <tr><td height="20px">&nbsp;</td></tr>
+
+        {% if EIS_info.module == "Contacts" %}
+            <tr>
+                <td><a href="/contacts/" class="module_current"><i class="fa fa-angle-double-right fw" aria-hidden="true"></i> Контакты</a></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;<a href="/contacts/new/" class="action">Добавить контакт</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td><a href="/contacts/" class="module">Контакты</a></td>
+            </tr>
+        {% endif %}
+
+        <tr><td height="20px">&nbsp;</td></tr>
+
+        {% if EIS_info.module == "Workers" %}
+            <tr>
+                <td><a href="/workers/" class="module_current"><i class="fa fa-angle-double-right fw" aria-hidden="true"></i> Сотрудники</a></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;<a href="/workers/new/" class="action">Добавить сотрудника</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td><a href="/workers/" class="module">Сотрудники</a></td>
+            </tr>
+        {% endif %}
     </table>
 </div>
