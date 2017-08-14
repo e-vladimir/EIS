@@ -179,7 +179,7 @@ body {
             font-weight: bold;
             color: #616161;
             text-transform: uppercase;
-        }
+            }
 
         .edit {
             text-transform: uppercase;
@@ -228,17 +228,31 @@ body {
             border-bottom:1px solid #2196f3;
             }
 
-    input, textarea {
-        padding: 5px 5px 5px 5px;
-        font-size:12px;
-        border: 1px solid #cccccc;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -khtml-border-radius: 3px;
-        background: #ffffff !important;
-        outline: none;
-        width: 250px;
-        }
+        input, textarea {
+            padding: 5px 5px 5px 5px;
+            font-size:12px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -khtml-border-radius: 3px;
+            background: #ffffff !important;
+            outline: none;
+            width: 250px;
+            }
 
+        /* Для главной страницы */
+        .section {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2196f3;
+            text-transform: uppercase;
+            }
+
+        .description {
+            font-size: 12px;
+            font-weight: none;
+            color: #616161;
+            text-transform: uppercase;
+            }
 }

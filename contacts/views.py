@@ -29,7 +29,7 @@ def page_contact_view(request, pk):
 		contact = get_object_or_404(EIS_Contact, pk=pk)
 
 		EIS_info['title'] = contact.name
-		EIS_info['subtitle'] = "{0}/{1}".format(contact.organization, contact.post)
+		EIS_info['subtitle'] = contact.organization
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
 		return render(request, 'contact_view.html', {'EIS_info': EIS_info, 'contact': contact})
