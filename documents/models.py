@@ -2,8 +2,12 @@ from django.db import models
 from django.utils import timezone
 
 
+DOCS_CATEGORIES = ['Учредительные документы', 'Технические документы', 'История техникума', 'Коды и информация', 'Лицензии и аккредитации']
+LIST_CATEGORIES = ((item, item) for item in DOCS_CATEGORIES)
+
+
 class EIS_Document(models.Model):
-	category    = models.CharField(max_length=100)
+	category    = models.CharField(max_length=100, choices=LIST_CATEGORIES)
 	name        = models.CharField(max_length=200)
 
 	date        = models.CharField(max_length=50, blank=True)

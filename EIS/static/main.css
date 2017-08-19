@@ -234,7 +234,7 @@ body {
             border-bottom:1px solid #2196f3;
             }
 
-        input, textarea {
+        input, textarea, select {
             padding: 5px 5px 5px 5px;
             font-size:12px;
             border: 1px solid #cccccc;
@@ -244,7 +244,11 @@ body {
             -khtml-border-radius: 3px;
             background: #ffffff !important;
             outline: none;
-            width: 250px;
+            width: 300px;
+            }
+
+        select {
+            width: 312px;
             }
 
         /* Для главной страницы */

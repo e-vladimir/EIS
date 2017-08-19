@@ -25,7 +25,8 @@ SECRET_KEY = '#^zq(%8_e%(__o%%hg%ex=&py84=gvrkqj-*&t^1ct*(3^dnap'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.0.1.3', '127.0.0.1']
 
 
 # Application definition
