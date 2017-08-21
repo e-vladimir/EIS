@@ -44,5 +44,14 @@
                 <td><a href="/workers/" class="module">Сотрудники</a></td>
             </tr>
         {% endif %}
+
+        <tr><td height="20px">&nbsp;</td></tr>
+
+        {% if user.is_superuser %}
+            <tr>
+                <td><a href="/admin/" class="module">ЦУП</a></td>
+            </tr>
+        {% endif %}
+
     </table>
 </div>

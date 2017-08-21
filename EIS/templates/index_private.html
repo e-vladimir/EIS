@@ -17,6 +17,14 @@
 
                     <tr><td><a href="/workers/" class="section">СОТРУДНИКИ</a></td></tr>
                     <tr><td><span class="description">Контактная информация сотрудников</span></td></tr>
+
+                    <tr><td height="20px">&nbsp;</td></tr>
+
+                    {% if user.is_superuser %}
+                        <tr><td><a href="/admin/" class="section">ЦУП</a></td></tr>
+                        <tr><td><span class="description">Центр Управления Полётами</span></td></tr>
+                    {% endif %}
+
                 </table>
             </td>
         </tr>
