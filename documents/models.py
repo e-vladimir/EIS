@@ -1,21 +1,29 @@
 from django.db import models
 from django.utils import timezone
 
+DOCS_CATEGORIES = [
+	'История техникума',
+	'Коды и информация',
+	'Лицензии и аккредитации',
+	'Наблюдательный совет',
+	'Технические документы',
+	'Учредительные документы',
+	'Шаблоны документов',
+    ]
 
-DOCS_CATEGORIES = ['Учредительные документы', 'Технические документы', 'История техникума', 'Коды и информация', 'Лицензии и аккредитации']
 LIST_CATEGORIES = ((item, item) for item in DOCS_CATEGORIES)
 
 
 class EIS_Document(models.Model):
-	category    = models.CharField(max_length=100, choices=LIST_CATEGORIES)
-	name        = models.CharField(max_length=200)
+	category = models.CharField(max_length=100, choices=LIST_CATEGORIES)
+	name = models.CharField(max_length=200)
 
-	date        = models.CharField(max_length=50, blank=True)
+	date = models.CharField(max_length=50, blank=True)
 
-	file_pdf    = models.FileField(blank=True, upload_to="pdf/")
-	file        = models.FileField(blank=True, upload_to="file/")
+	file_pdf = models.FileField(blank=True, upload_to="pdf/")
+	file = models.FileField(blank=True, upload_to="file/")
 
-	note        = models.TextField(blank=True)
+	note = models.TextField(blank=True)
 
 	update_user = models.CharField(max_length=200, default="Аноним")
 	update_date = models.DateTimeField(null=True, blank=True)
@@ -62,4 +70,3 @@ class EIS_Document(models.Model):
 				return "Ошибка"
 		else:
 			return ""
-
