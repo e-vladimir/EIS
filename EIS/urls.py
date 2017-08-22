@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic import RedirectView
+
 from . import views
 
 urlpatterns = [
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     url(r'^media/pdf/(?P<filename>.*)$', views.pdf_download, name="pdf_download"),
     url(r'^media/file/(?P<filename>.*)$', views.file_download, name="file_download"),
     url(r'^admin/logout/', views.logout),
