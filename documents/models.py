@@ -1,4 +1,6 @@
+import os
 from django.db import models
+from django.dispatch import receiver
 from django.utils import timezone
 
 DOCS_CATEGORIES = [
@@ -11,7 +13,7 @@ DOCS_CATEGORIES = [
 	'Технические документы',
 	'Учредительные документы',
 	'Шаблоны документов',
-    ]
+	]
 
 LIST_CATEGORIES = ((item, item) for item in DOCS_CATEGORIES)
 
@@ -72,3 +74,39 @@ class EIS_Document(models.Model):
 				return "Ошибка"
 		else:
 			return ""
+
+
+@receiver(models.signals.pre_save, sender=EIS_Document)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+	if not instance.pk:
+		return False
+
+	try:
+		old_file = EIS_Document.objects.get(pk=instance.pk).file
+		old_pdf = EIS_Document.objects.get(pk=instance.pk).file_pdf
+	except EIS_Document.DoesNotExist:
+		return False
+
+	new_file = instance.file
+	new_pdf = instance.file_pdf
+
+	try:
+		if not old_file == new_file:
+			if os.path.isfile(old_file.path):
+				os.remove(old_file.path)
+	except:
+		pass
+
+	try:
+		if not old_pdf == new_pdf:
+			if os.path.isfile(old_pdf.path):
+				os.remove(old_pdf.path)
+	except:
+		pass
+
+
+@receiver(models.signals.post_delete, sender=EIS_Document)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+	if instance.file:
+		if os.path.isfile(instance.file.path):
+			os.remove(instance.file.path)
