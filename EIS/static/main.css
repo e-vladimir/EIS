@@ -259,10 +259,23 @@ body {
             text-transform: uppercase;
             }
 
+        .head {
+            font-size: 16px;
+            font-weight: bold;
+            color: #424242;
+            text-transform: uppercase;
+            }
+
         .description {
             font-size: 12px;
             font-weight: none;
             color: #616161;
             text-transform: uppercase;
+            }
+
+        .news {
+            font-size: 12px;
+            font-weight: none;
+            color: #616161;
             }
 }
