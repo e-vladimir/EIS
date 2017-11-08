@@ -18,16 +18,30 @@ DOCS_CATEGORIES = [
 LIST_CATEGORIES = ((item, item) for item in DOCS_CATEGORIES)
 
 
+def rename_upload(instance, filename, folder):
+	ext = filename.split('.')
+	filename = "%s/%s %s.%s" % (folder, ext[0], timezone.datetime.now().strftime("%Y-%m-%d"), ext[-1])
+	return filename
+
+
+def rename_upload_file(instance, filename):
+	return rename_upload(instance, filename, "file")
+
+
+def rename_upload_pdf(instance, filename):
+	return rename_upload(instance, filename, "pdf")
+
+
 class EIS_Document(models.Model):
-	category = models.CharField(max_length=100, choices=LIST_CATEGORIES)
-	name = models.CharField(max_length=200)
+	category    = models.CharField(max_length=100, choices=LIST_CATEGORIES)
+	name        = models.CharField(max_length=200)
 
-	date = models.CharField(max_length=50, blank=True)
+	date        = models.CharField(max_length=50, blank=True)
 
-	file_pdf = models.FileField(blank=True, upload_to="pdf/")
-	file = models.FileField(blank=True, upload_to="file/")
+	file_pdf    = models.FileField(blank=True, upload_to=rename_upload_pdf)
+	file        = models.FileField(blank=True, upload_to=rename_upload_file)
 
-	note = models.TextField(blank=True)
+	note        = models.TextField(blank=True)
 
 	update_user = models.CharField(max_length=200, default="Аноним")
 	update_date = models.DateTimeField(null=True, blank=True)
