@@ -21,13 +21,24 @@
                     <tr><td height="20px">&nbsp;</td></tr>
 
                     {% if user.is_superuser %}
+                        <tr><td><a href="/utils/" class="section">Утилиты</a></td></tr>
+                        <tr><td><span class="description">Утилиты обслуживания системы</span></td></tr>
+
+                        <tr><td height="20px">&nbsp;</td></tr>
+
                         <tr><td><a href="/admin/" class="section">ЦУП</a></td></tr>
                         <tr><td><span class="description">Центр Управления Полётами</span></td></tr>
                     {% endif %}
 
+                    <tr><td height="50">&nbsp;</td></tr>
+                    <tr><td height="20px"><span class="head">ПОСЛЕДНИЕ ОБНОВЛЕНИЯ</span></td></tr>
+                    <tr><td height="5px"></td></tr>
+                    <tr><td><span class="news"><b>08 ноября 2017</b><br>ДОКУМЕНТЫ: В имя прикрепляемого файла автоматически добавляется текущая дата.</span></td></tr>
+                    <tr><td height="5px"></td></tr>
+                    <tr><td><span class="news"><b>07 ноября 2017</b><br>ДОКУМЕНТЫ: При обновлении файлов документа, старые файлы автоматически удаляются из системы.</span></td></tr>
+
                 </table>
             </td>
-        </tr>
     </table>
 </div>
 
