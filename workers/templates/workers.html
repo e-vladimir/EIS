@@ -8,35 +8,36 @@
             <table width="100%">
                 {% regroup workers by category as categories %}
                     {% for category in categories %}
-                    <tr><td class="group" colspan="5">{{ category.grouper }}</td></tr>
+                        <tr><td><details><summary class="group" >{{ category.grouper }}</summary>
 
-                    {% for worker in category.list %}
-                    <tr>
-                        <td width="40%" class="first_col"><a href="/workers/view/{{ worker.pk }}/" class="name">{{worker.name}}</a><br><span class="small">{{ worker.post }}</span></td>
-                        <td class="note">{{ worker.note}}</td>
-                        <td width="150px" align="center">{% if worker.phone %}
-                            <span class="numbers">{{ worker.phone }}</span><br><span class="small">Рабочий</span>
-                            {% else %}
-                            &nbsp;
-                            {% endif %}
-                        </td>
-                        <td width="150px" align="center">{% if worker.phone_mobile %}
-                                <span class="numbers">{{ worker.phone_mobile }}</span><br><span class="small">Мобильный</span>
-                            {% else %}
-                            &nbsp;
-                            {% endif %}
-                        </td>
-                        <td width="150px" align="center">{% if worker.email %}
-                            <a href="mailto:{{ worker.email }}" class="file">{{ worker.email }}</a><br><span class="small">e-Mail</span>
-                            {% else %}
-                            &nbsp;
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr><td colspan="5"><hr></td></tr>
-
-                    {% endfor %}
-                <tr><td>&nbsp;</td></tr>
+                        {% for worker in category.list %}
+                            <table>
+                                <tr>
+                                    <td width="40%" class="first_col"><a href="/workers/view/{{ worker.pk }}/" class="name">{{worker.name}}</a><br><span class="small">{{ worker.post }}</span></td>
+                                    <td class="note">{{ worker.note}}</td>
+                                    <td width="150px" align="center">{% if worker.phone %}
+                                        <span class="numbers">{{ worker.phone }}</span><br><span class="small">Рабочий</span>
+                                        {% else %}
+                                        &nbsp;
+                                        {% endif %}
+                                    </td>
+                                    <td width="150px" align="center">{% if worker.phone_mobile %}
+                                            <span class="numbers">{{ worker.phone_mobile }}</span><br><span class="small">Мобильный</span>
+                                        {% else %}
+                                        &nbsp;
+                                        {% endif %}
+                                    </td>
+                                    <td width="150px" align="center">{% if worker.email %}
+                                        <a href="mailto:{{ worker.email }}" class="file">{{ worker.email }}</a><br><span class="small">e-Mail</span>
+                                        {% else %}
+                                        &nbsp;
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr><td colspan="5"><hr></td></tr>
+                            </table>
+                        {% endfor %}
+                    </details></td></tr>
                 {% endfor %}
             </table>
             </div>
