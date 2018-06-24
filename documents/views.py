@@ -19,7 +19,7 @@ def page_documents(request):
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Documents"
 
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		documents = EIS_Document.objects.all().order_by("category", "name")
 
 		EIS_info['title'] = "Список документов"
@@ -36,7 +36,7 @@ def page_document_view(request, pk):
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Documents"
 
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		document = get_object_or_404(EIS_Document, pk=pk)
 
 		EIS_info['title'] = document.name
@@ -54,7 +54,7 @@ def page_document_edit(request, pk):
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Documents"
 
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		document = get_object_or_404(EIS_Document, pk=pk)
 
 		EIS_info['title'] = document.name
@@ -85,7 +85,7 @@ def page_document_new(request):
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Documents"
 
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		EIS_info['title'] = "Новый документ"
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 

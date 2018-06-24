@@ -10,7 +10,7 @@ def page_contacts(request):
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Contacts"
 
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		contacts = EIS_Contact.objects.all().order_by("organization", "post", "name")
 
 		EIS_info['title'] = "Список внешних контактов"
@@ -27,7 +27,7 @@ def page_contact_view(request, pk):
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Contacts"
 
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		contact = get_object_or_404(EIS_Contact, pk=pk)
 
 		EIS_info['title'] = contact.name
@@ -45,7 +45,7 @@ def page_contact_edit(request, pk):
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Contacts"
 
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		contact = get_object_or_404(EIS_Contact, pk=pk)
 
 		EIS_info['title'] = contact.name
@@ -72,7 +72,7 @@ def page_contact_new(request):
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Contacts"
 
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		EIS_info['title'] = "Новый контакт"
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
