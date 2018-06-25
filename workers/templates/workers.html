@@ -11,7 +11,7 @@
                         <tr><td><details><summary class="group" >{{ category.grouper }}</summary>
 
                         {% for worker in category.list %}
-                            <table>
+                            <table width="100%">
                                 <tr>
                                     <td width="40%" class="first_col"><a href="/workers/view/{{ worker.pk }}/" class="name">{{worker.name}}</a><br><span class="small">{{ worker.post }}</span></td>
                                     <td class="note">{{ worker.note}}</td>
