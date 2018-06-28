@@ -30,10 +30,6 @@ body {
     border-radius: 2px;
     }
 
-    details {
-    cursor: pointer;
-    }
-
     summary {
     border-radius: 2px;
     cursor: pointer;

@@ -3,6 +3,8 @@ from EIS import settings
 from . import views
 
 # /archives - список документов
+# /archives/period/<period> - список документов за указанный период
+# /archives/category/<category> - список документов в категории
 # /archives/edit/<num> - редактирование
 # /archives/view/<num> - просмотр
 # /archives/new - создание

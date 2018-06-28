@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 	'documents',
 	'contacts',
 	'workers',
+	'archives',
 ]
 
 MIDDLEWARE = [
