@@ -9,35 +9,39 @@
                 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <table cellspacing="10px">
                         <tr>
-                            <td align="right"><span class="field">Фамилия Имя Отчество</span></td>
+                            <td align="right"><span class="field">Период (год)</span></td>
+                            <td>{{ form.period_year }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Период (месяц)</span></td>
+                            <td>{{ form.period_month }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+
+                        <tr>
+                            <td align="right"><span class="field">Категория</span></td>
+                            <td>{{ form.category }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Название</span></td>
                             <td>{{ form.name }}</td>
                         </tr>
-                        <tr>
-                            <td align="right"><span class="field">Должность</span></td>
-                            <td>{{ form.post }}</td>
-                        </tr>
-                        <tr>
-                            <td align="right"><span class="field">Организация</span></td>
-                            <td>{{ form.organization }}</td>
-                        </tr>
-                        <tr><td colspan="2"><hr></td></tr>
-                        <tr>
-                            <td align="right"><span class="field">Телефон рабочий</span></td>
-                            <td>{{ form.phone }}</td>
-                        </tr>
-                        <tr>
-                            <td align="right"><span class="field">Телефон мобильный</span></td>
-                            <td>{{ form.phone_mobile }}</td>
-                        </tr>
-                        <tr>
-                            <td align="right"><span class="field">e-mail</span></td>
-                            <td>{{ form.email }}</td>
-                        </tr>
-                        <tr><td colspan="2"><hr></td></tr>
+
                         <tr>
                             <td align="right"><span class="field">Примечание</span></td>
                             <td>{{ form.note }}</td>
                         </tr>
+
+                        <tr><td colspan="2"><hr></td></tr>
+                        <tr>
+                            <td align="right"><span class="field">PDF файл</span></td>
+                            <td>{{ form.file_in_pdf }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Файл</span></td>
+                            <td>{{ form.file_in }}</td>
+                        </tr>
+
                         <tr><td colspan="2"><hr></td></tr>
                         <tr>
                             <td>&nbsp;</td>

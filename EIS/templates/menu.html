@@ -47,6 +47,21 @@
 
         <tr><td height="20px">&nbsp;</td></tr>
 
+        {% if EIS_info.module == "Archives" %}
+            <tr>
+                <td><a href="/archives/" class="module_current"><i class="fa fa-angle-double-right fw" aria-hidden="true"></i> Архив</a></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;<a href="/archives/new/" class="action">Добавить в архив</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td><a href="/archives/" class="module">Архив</a></td>
+            </tr>
+        {% endif %}
+
+        <tr><td height="20px">&nbsp;</td></tr>
+
         {% if user.is_superuser %}
             <tr>
                 <td><a href="/utils/" class="module">Утилиты</a></td>

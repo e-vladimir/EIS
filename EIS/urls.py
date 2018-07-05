@@ -20,13 +20,18 @@ from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
-    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
-    url(r'^media/pdf/(?P<filename>.*)$', views.pdf_download, name="pdf_download"),
+    url(r'^favicon\.ico$',                RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
+
+    url(r'^media/pdf/(?P<filename>.*)$',  views.pdf_download, name="pdf_download"),
     url(r'^media/file/(?P<filename>.*)$', views.file_download, name="file_download"),
-    url(r'^admin/logout/', views.logout),
-    url(r'^workers/', include('workers.urls')),
-    url(r'^documents/', include('documents.urls')),
-    url(r'^contacts/', include('contacts.urls')),
-    url(r'^admin/', admin.site.urls),
-    url(r'', views.page_index),
+
+    url(r'^admin/logout/',                views.logout),
+    url(r'^admin/',                       admin.site.urls),
+
+    url(r'^workers/',                     include('workers.urls')),
+    url(r'^documents/',                   include('documents.urls')),
+    url(r'^contacts/',                    include('contacts.urls')),
+    url(r'^archives/',                    include('archives.urls')),
+
+    url(r'',                              views.page_index),
 ]
