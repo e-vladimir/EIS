@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from EIS.global_info import *
 from .models import EIS_Archive
 from .forms import ArchiveForm
+from django.utils import timezone
 
 
 def page_arvhives(request):
@@ -11,7 +13,16 @@ def page_arvhives(request):
 	EIS_info['module']  = "Archives"
 
 	if request.user.is_authenticated:
-		documents = EIS_Archive.objects.all().order_by("period_year", "period_month", "category", "name")
+		documents  = EIS_Archive.objects.all().order_by("period_year", "period_month", "category", "description")
+		period     = []
+		categories = []
+
+		for document in documents:
+			period_year = document.period_year
+			category    = document.category
+
+			if period_year not in period:     period.append(period_year)
+			if category    not in categories: categories.append(category)
 
 		EIS_info['title'] = "Архив документов"
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
@@ -80,9 +91,13 @@ def page_archive_new(request):
 			form = ArchiveForm(request.POST, request.FILES)
 
 			if form.is_valid():
+				document = form.save(commit=False)
+				document.update_user = "{0} {1}".format(request.user.first_name, request.user.last_name)
+				document.update_date = timezone.now()
+
 				form.save()
 
-				return redirect('page_arvhives')
+				return redirect('page_archives')
 		else:
 			form = ArchiveForm()
 			return render(request, 'archive_new.html', {'EIS_info': EIS_info, 'form': form})
