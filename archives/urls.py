@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from EIS import settings
 from . import views
 
@@ -10,8 +10,8 @@ from . import views
 # /archives/new - создание
 
 urlpatterns = [
-	url(r'^$',    views.page_arvhives,    name='page_archives'),
-	url(r'^new/', views.page_archive_new, name='page_archive_new'),
+	path('',     views.page_arvhives),
+	path('new/', views.page_archive_new),
 	# url(r'^view/(?P<pk>[0-9]+)/$', views.page_contact_view, name='page_contact_view'),
 	# url(r'^edit/(?P<pk>[0-9]+)/$', views.page_contact_edit, name='page_contact_edit'),
 ]

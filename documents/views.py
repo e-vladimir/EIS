@@ -39,9 +39,9 @@ def page_document_view(request, pk):
 	if request.user.is_authenticated:
 		document = get_object_or_404(EIS_Document, pk=pk)
 
-		EIS_info['title'] = document.name
+		EIS_info['title']    = document.name
 		EIS_info['subtitle'] = document.category
-		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
+		EIS_info['user']     = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
 		return render(request, 'document_view.html', {'EIS_info': EIS_info, 'document': document})
 	else:

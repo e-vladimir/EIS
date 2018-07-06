@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from EIS import settings
 from . import views
 
@@ -8,8 +8,8 @@ from . import views
 # /workers/new - создание
 
 urlpatterns = [
-	url(r'^$', views.page_workers, name='page_workers'),
-	url(r'^new/', views.page_worker_new, name='page_worker_new'),
-	url(r'^view/(?P<pk>[0-9]+)/$', views.page_worker_view, name='page_worker_view'),
-	url(r'^edit/(?P<pk>[0-9]+)/$', views.page_worker_edit, name='page_worker_edit'),
+	path('',               views.page_workers),
+	path('new/',           views.page_worker_new),
+	path('view/<int:pk>/', views.page_worker_view),
+	path('edit/<int:pk>/', views.page_worker_edit),
 ]
