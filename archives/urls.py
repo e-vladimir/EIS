@@ -10,8 +10,15 @@ from . import views
 # /archives/new - создание
 
 urlpatterns = [
-	path('',     views.page_arvhives),
-	path('new/', views.page_archive_new),
-	# url(r'^view/(?P<pk>[0-9]+)/$', views.page_contact_view, name='page_contact_view'),
-	# url(r'^edit/(?P<pk>[0-9]+)/$', views.page_contact_edit, name='page_contact_edit'),
+	path('',                                              views.page_archives),
+
+	path('filter/<int:year>/',                                   views.page_archives_filter),
+	path('filter/<int:year>/<int:month>/',                views.page_archives_filter),
+	path('filter/<int:year>/<int:month>/<str:category>/', views.page_archives_filter),
+
+	path('filter/<str:category>/',                               views.page_archives_filter),
+	path('filter/<str:category>/<int:year>/',                    views.page_archives_filter),
+	path('filter/<str:category>/<int:year>/<int:month>/',        views.page_archives_filter),
+
+	path('new/',                                          views.page_archive_new),
 ]

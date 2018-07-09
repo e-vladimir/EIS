@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from EIS.global_info import *
 from .models import EIS_Archive
@@ -6,28 +5,66 @@ from .forms import ArchiveForm
 from django.utils import timezone
 
 
-def page_arvhives(request):
+def page_archives(request):
 	EIS_info            = dict()
 	EIS_info['name']    = EIS_NAME
 	EIS_info['version'] = EIS_VERSION
 	EIS_info['module']  = "Archives"
 
 	if request.user.is_authenticated:
-		documents  = EIS_Archive.objects.all().order_by("period_year", "period_month", "category", "description")
-		period     = []
-		categories = []
+		documents     = EIS_Archive.objects.all().order_by("period_year",
+		                                                   "period_month",
+		                                                   "category",
+		                                                   "description")
+		list_year     = []
+		list_category = []
 
 		for document in documents:
-			period_year = document.period_year
-			category    = document.category
+			doc_year     = document.period_year
+			doc_category = document.category
 
-			if period_year not in period:     period.append(period_year)
-			if category    not in categories: categories.append(category)
+			if doc_year        not in list_year:     list_year.append(doc_year)
+			if doc_category    not in list_category: list_category.append(doc_category)
 
 		EIS_info['title'] = "Архив документов"
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
-		return render(request, 'archives.html', {'EIS_info': EIS_info})
+		list_year.sort()
+		list_category.sort()
+
+		return render(request, 'archives.html', {'EIS_info'     : EIS_info,
+		                                         'list_year'    : list_year,
+		                                         'list_category': list_category})
+	else:
+		return render(request, 'index_public.html', {'EIS_info': EIS_info})
+
+
+def page_archives_filter(request, year=None, month=None, category=None):
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
+	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Archives"
+
+	if request.user.is_authenticated:
+		EIS_info['title'] = "Архив документов "
+
+		documents     = EIS_Archive.objects.all().order_by("period_year",
+		                                                   "period_month",
+		                                                   "category",
+		                                                   "description")
+
+		if category is not None:
+			EIS_info['title'] += "по категории {0}".format(category)
+
+		if year is not None:
+			if month is not None:
+				EIS_info['title'] += "за {0} {1} года".format(month, year)
+			else:
+				EIS_info['title'] += "за {0} год".format(year)
+
+		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
+
+		return render(request, 'archives_period.html', {'EIS_info': EIS_info})
 	else:
 		return render(request, 'index_public.html', {'EIS_info': EIS_info})
 
@@ -85,21 +122,25 @@ def page_archive_new(request):
 
 	if request.user.is_authenticated:
 		EIS_info['title'] = "Добавление в архив"
-		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
+		EIS_info['user']  = "{0} {1}".format(request.user.first_name,
+		                                    request.user.last_name)
 
 		if request.method == "POST":
-			form = ArchiveForm(request.POST, request.FILES)
+			form = ArchiveForm(request.POST,
+			                   request.FILES)
 
 			if form.is_valid():
-				document = form.save(commit=False)
-				document.update_user = "{0} {1}".format(request.user.first_name, request.user.last_name)
+				document             = form.save(commit=False)
+				document.update_user = "{0} {1}".format(request.user.first_name,
+				                                        request.user.last_name)
 				document.update_date = timezone.now()
 
 				form.save()
 
-				return redirect('page_archives')
+				return redirect('/archives/')
 		else:
 			form = ArchiveForm()
-			return render(request, 'archive_new.html', {'EIS_info': EIS_info, 'form': form})
+			return render(request, 'archive_new.html', {'EIS_info': EIS_info,
+			                                            'form'    : form})
 	else:
 		return render(request, 'index_public.html', {'EIS_info': EIS_info})

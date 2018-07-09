@@ -10,30 +10,23 @@
                         <td valign="top" width="100px">
                             <table>
                                 <tr><td class="archive_current">Период</td></tr>
-                                <tr><td class="archive_action_year"><a href="./2015">2015</a></td></tr>
-                                <tr><td class="archive_action_year"><a href="./2016">2016</a></td></tr>
-                                <tr><td class="archive_action_year"><a href="./2017">2017</a></td></tr>
-                                <tr><td class="archive_action_year"><a href="./2018">2018</a></td></tr>
+
+                                {% for year in list_year %}
+                                    <tr><td class="archive_action"><a href="/archives/filter/{{year}}/">{{year}}</a></td></tr>
+                                {% endfor %}
                             </table>
                         </td>
 
                         <td valign="top" width="200px">
                             <table>
                                 <tr><td class="archive_current">Тип документа</td></tr>
-                                <tr><td class="archive_action"><a href="./">Приказы</a></td></tr>
-                                <tr><td class="archive_action"><a href="./">Приказы (внешние)</a></td></tr>
-                                <tr><td class="archive_action"><a href="./">Распоряжения</a></td></tr>
-                                <tr><td class="archive_action"><a href="./">Локальные акты</a></td></tr>
-                                <tr><td class="archive_action"><a href="./">Заявки</a></td></tr>
-                                <tr><td class="archive_action"><a href="./">Заявления</a></td></tr>
+                                {% for category in list_category %}
+                                    <tr><td class="archive_action"><a href="/archives/filter/{{category}}/">{{category}}</a></td></tr>
+                                {% endfor %}
                             </table>
                         </td>
 
                         <td valign="top" align="left">
-                            <table>
-                                <tr><td class="archive_current">Ключевые слова</td></tr>
-                                <tr><td class="archive_action"><a href="./">Легион</a></td></tr>
-                            </table>
                         </td>
                     </tr>
                 </table>
