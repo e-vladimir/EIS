@@ -14,7 +14,7 @@
                                         <tr><td class="archive_current">{{year}}</td></tr>
                                         {% for month in list_month %}
                                             {% if month == month_current %}
-                                                <tr><td class="archive_current">{{month}}</td></tr>
+                                                <tr><td class="archive_current">{{ month }}</td></tr>
                                             {% else %}
                                                 <tr><td class="archive_action"><a href="/archives/filter/{{year_current}}/{{month}}">{{month}}</a></td></tr>
                                             {% endif %}

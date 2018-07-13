@@ -7,7 +7,7 @@ from django.utils import timezone
 
 class CMonth:
 	def get_month(self, in_month):
-		return LIST_MONTH[in_month]
+		return LIST_MONTH[int(in_month)][1]
 
 
 def page_archives(request):
@@ -80,7 +80,7 @@ def page_archives_filter(request, year=None, month=None, category=None):
 					include_doc = doc_year == str(year)
 
 					if include_doc:
-						if doc_month not in list_month: list_month.append(int(doc_month))
+						if int(doc_month) not in list_month: list_month.append(int(doc_month))
 
 					if month is not None:
 						include_doc = include_doc and (int(doc_month) == int(month))
@@ -103,6 +103,9 @@ def page_archives_filter(request, year=None, month=None, category=None):
 				EIS_info['title'] += "за {0} год".format(year)
 
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
+
+		# if month is None:
+		# 	month = ""
 
 		params = {'EIS_info'      : EIS_info,
 		          'list_year'     : list_year,
