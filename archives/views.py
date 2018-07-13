@@ -5,11 +5,6 @@ from .forms import ArchiveForm
 from django.utils import timezone
 
 
-class CMonth:
-	def get_month(self, in_month):
-		return LIST_MONTH[int(in_month)][1]
-
-
 def page_archives(request):
 	EIS_info            = dict()
 	EIS_info['name']    = EIS_NAME
@@ -104,17 +99,13 @@ def page_archives_filter(request, year=None, month=None, category=None):
 
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
-		# if month is None:
-		# 	month = ""
-
 		params = {'EIS_info'      : EIS_info,
 		          'list_year'     : list_year,
 		          'year_current'  : str(year),
 		          'category_current': str(category),
 		          'list_documents': list_documents,
 		          'list_month'    : list_month,
-		          'month_current' : month,
-		          'cmonth'        : LIST_MONTH}
+		          'month_current' : month}
 
 		return render(request, 'archives_filter.html', params)
 	else:

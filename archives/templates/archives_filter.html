@@ -1,5 +1,7 @@
 {% include "header.html" %}
 
+{% load archives_extras %}
+
 <table width="100%">
     <tr>
         <td width="165px" valign="top">{% include "menu.html" %}</td>
@@ -11,14 +13,22 @@
                             <table width="100%">
                                 {% for year in list_year %}
                                     {% if year == year_current %}
+                                        {% if year != list_year|first %}
+                                            <tr><td>&nbsp;</td></tr>
+                                        {% endif %}
+
                                         <tr><td class="archive_current">{{year}}</td></tr>
                                         {% for month in list_month %}
                                             {% if month == month_current %}
-                                                <tr><td class="archive_current">{{ month }}</td></tr>
+                                                <tr><td class="archive_current">{% month_to_str month %}</td></tr>
                                             {% else %}
-                                                <tr><td class="archive_action"><a href="/archives/filter/{{year_current}}/{{month}}">{{month}}</a></td></tr>
+                                                <tr><td class="archive_action"><a href="/archives/filter/{{year_current}}/{{month}}">{% month_to_str month %}</a></td></tr>
                                             {% endif %}
                                         {% endfor %}
+
+                                        {% if year != list_year|last %}
+                                            <tr><td>&nbsp;</td></tr>
+                                        {% endif %}
                                     {% else %}
                                         <tr><td class="archive_action"><a href="/archives/filter/{{year}}/">{{year}}</a></td></tr>
                                     {% endif %}
@@ -81,7 +91,9 @@
                                                 </td>
                                             </tr>
 
-                                            <tr><td colspan="5"><hr></td></tr>
+                                            {% if document != category.list|last %}
+                                                <tr><td colspan="5"><hr></td></tr>
+                                            {% endif %}
                                         </table>
                                     {% endfor %}
                                 </details></td></tr>
