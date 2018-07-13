@@ -86,9 +86,6 @@ class EIS_Archive(models.Model):
 	update_user     = models.CharField(max_length=200, default="Аноним")
 	update_date     = models.DateTimeField(null=True, blank=True)
 
-	def __str__(self):
-		return "{0}/{1}".format(self.category, self.description)
-
 	def delete(self, using=None, keep_parents=False):
 		self.file.delete()
 		self.file_pdf.delete()

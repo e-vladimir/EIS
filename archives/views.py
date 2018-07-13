@@ -54,9 +54,9 @@ def page_archives_filter(request, year=None, month=None, category=None):
 
 		list_documents = []
 
-		documents      = EIS_Archive.objects.all().order_by("period_year",
+		documents      = EIS_Archive.objects.all().order_by("category",
+		                                                    "period_year",
 		                                                    "period_month",
-		                                                    "category",
 		                                                    "description")
 
 		for document in documents:
