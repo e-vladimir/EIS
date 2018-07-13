@@ -17,12 +17,12 @@
                                             <tr><td>&nbsp;</td></tr>
                                         {% endif %}
 
-                                        <tr><td class="archive_current">{{year}}</td></tr>
+                                <tr><td class="archive_current"><a href="/archives/filter/{{cat_link}}{{year}}/"><u>{{year}}</u></a></td></tr>
                                         {% for month in list_month %}
                                             {% if month == month_current %}
                                                 <tr><td class="archive_current">{% month_to_str month %}</td></tr>
                                             {% else %}
-                                                <tr><td class="archive_action"><a href="/archives/filter/{{year_current}}/{{month}}">{% month_to_str month %}</a></td></tr>
+                                                <tr><td class="archive_action"><a href="/archives/filter/{{cat_link}}{{year_current}}/{{month}}">{% month_to_str month %}</a></td></tr>
                                             {% endif %}
                                         {% endfor %}
 
@@ -30,7 +30,7 @@
                                             <tr><td>&nbsp;</td></tr>
                                         {% endif %}
                                     {% else %}
-                                        <tr><td class="archive_action"><a href="/archives/filter/{{year}}/">{{year}}</a></td></tr>
+                                        <tr><td class="archive_action"><a href="/archives/filter/{{cat_link}}{{year}}/">{{year}}</a></td></tr>
                                     {% endif %}
                                 {% endfor %}
                             </table>

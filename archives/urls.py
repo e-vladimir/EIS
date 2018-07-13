@@ -18,6 +18,8 @@ urlpatterns = [
 	path('filter/<int:year>/<int:month>/<str:category>/', views.page_archives_filter),
 
 	path('filter/<str:category>/',                        views.page_archives_filter),
+	path('filter/<str:category>/<int:year>/',             views.page_archives_filter),
+	path('filter/<str:category>/<int:year>/<int:month>/', views.page_archives_filter),
 
 	path('new/',                                          views.page_archive_new),
 ]

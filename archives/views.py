@@ -71,14 +71,16 @@ def page_archives_filter(request, year=None, month=None, category=None):
 			if category is not None:
 				include_doc = doc_category == str(category)
 			else:
-				if year is not None:
-					include_doc = doc_year == str(year)
+				include_doc = True
 
-					if include_doc:
-						if int(doc_month) not in list_month: list_month.append(int(doc_month))
+			if year is not None:
+				include_doc = include_doc and (doc_year == str(year))
 
-					if month is not None:
-						include_doc = include_doc and (int(doc_month) == int(month))
+				if include_doc:
+					if int(doc_month) not in list_month: list_month.append(int(doc_month))
+
+				if month is not None:
+					include_doc = include_doc and (int(doc_month) == int(month))
 
 			if include_doc:
 				list_documents.append(document)
@@ -93,11 +95,16 @@ def page_archives_filter(request, year=None, month=None, category=None):
 
 		if year is not None:
 			if month is not None:
-				EIS_info['title'] += "за {0} {1} года".format(month, year)
+				EIS_info['title'] += "за {0} {1} года".format(LIST_MONTH[int(month)][1], year)
 			else:
 				EIS_info['title'] += "за {0} год".format(year)
 
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
+
+		if category is None:
+			cat_link = ""
+		else:
+			cat_link = "{0}/".format(category)
 
 		params = {'EIS_info'      : EIS_info,
 		          'list_year'     : list_year,
@@ -105,7 +112,8 @@ def page_archives_filter(request, year=None, month=None, category=None):
 		          'category_current': str(category),
 		          'list_documents': list_documents,
 		          'list_month'    : list_month,
-		          'month_current' : month}
+		          'month_current' : month,
+		          'cat_link'      : cat_link}
 
 		return render(request, 'archives_filter.html', params)
 	else:
