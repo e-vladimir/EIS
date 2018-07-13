@@ -1,0 +1,99 @@
+{% include "header.html" %}
+
+<table width="100%">
+    <tr>
+        <td width="165px" valign="top">{% include "menu.html" %}</td>
+        <td valign="top">
+            <div class="content">
+                <table width="100%">
+                    <tr>
+                        <td valign="top" width="100px">
+                            <table width="100%">
+                                {% for year in list_year %}
+                                    {% if year == year_current %}
+                                        <tr><td class="archive_current">{{year}}</td></tr>
+                                        {% for month in list_month %}
+                                            {% if month == month_current %}
+                                                <tr><td class="archive_current">{{month}}</td></tr>
+                                            {% else %}
+                                                <tr><td class="archive_action"><a href="/archives/filter/{{year_current}}/{{month}}">{{month}}</a></td></tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr><td class="archive_action"><a href="/archives/filter/{{year}}/">{{year}}</a></td></tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        </td>
+
+                        <td valign="top" align="left">
+                            <table width="100%">
+                            {% regroup list_documents by category as categories %}
+                                {% for category in categories %}
+                                    <tr><td><details><summary class="group" >{{ category.grouper }}</summary>
+
+                                    {% for document in category.list %}
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="50px" align="center">
+                                                    <span class="user_update">{{document.period_year}}</span>
+                                                </td>
+                                                <td class="first_col"><a href="/archives/view/{{ document.pk }}/" class="name">{{document.description}}</a></td>
+                                                <td width="50px" align="center">
+                                                    {% if document.file_pdf %}
+                                                        <a href="{{ document.file_pdf.url }}" class="pdf">PDF</a>
+                                                    {% else %}
+                                                        &nbsp;
+                                                    {% endif %}
+                                                </td>
+                                                <td width="50px" align="center">
+                                                    {% if document.file %}
+                                                        <a href="{{ document.file.url }}" class="file">{{ document.get_extension }}</a>
+                                                    {% else %}
+                                                        &nbsp;
+                                                    {% endif %}
+                                                </td>
+                                                <td align="right" class="last_col" width="150px">
+                                                    <span class="user_update">{{ document.update_user }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="50px" align="center">
+                                                    <span class="user_update">{{ document.get_month_str }}</span>
+                                                </td>
+                                                <td class="note">&nbsp;&nbsp;{{document.note}}</td>
+                                                <td width="50px" align="center">
+                                                    {% if document.file_pdf %}
+                                                        <span class="small">{{ document.get_pdf_size }}</span>
+                                                    {% else %}
+                                                        &nbsp;
+                                                    {% endif %}
+                                                </td>
+                                                <td width="50px" align="center">
+                                                    {% if document.file %}
+                                                        <span class="small">{{ document.get_size }}</span>
+                                                    {% else %}
+                                                        &nbsp;
+                                                    {% endif %}
+                                                </td>
+                                                <td align="right" class="last_col" width="150px">
+                                                    <span class="small">{{ document.update_date|date:"d E Y" }}</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr><td colspan="5"><hr></td></tr>
+                                        </table>
+                                    {% endfor %}
+                                </details></td></tr>
+
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+
+{% include "end.html" %}

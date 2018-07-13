@@ -50,3 +50,25 @@ def file_download(request, filename):
 	f.close()
 
 	return response
+
+
+def archive_pdf_download(request, filename):
+	f = open(os.path.join(settings.MEDIA_ROOT, 'archive', 'pdf', filename), "rb")
+
+	response = HttpResponse(FileWrapper(f), content_type='application/pdf')
+	response['Content-Disposition'] = 'attachment; filename=' + filename
+
+	f.close()
+
+	return response
+
+
+def archive_file_download(request, filename):
+	f = open(os.path.join(settings.MEDIA_ROOT, 'archive', 'file', filename), "rb")
+
+	response = HttpResponse(FileWrapper(f), content_type='application/force-download')
+	response['Content-Disposition'] = 'attachment; filename=' + filename
+
+	f.close()
+
+	return response

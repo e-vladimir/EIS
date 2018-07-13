@@ -57,11 +57,18 @@ LIST_MONTH = (("00", "Нет данных"),
               ("12", "Декабрь"),)
 
 
-def rename_upload_file(instance, filename):
+def rename_upload(instance, filename, folder):
 	ext = filename.split('.')
-	filename = "archive/%s %s.%s" % (ext[0], timezone.datetime.now().strftime("%Y-%m-%d"), ext[-1])
-
+	filename = "%s/%s %s.%s" % (folder, ext[0], timezone.datetime.now().strftime("%Y-%m-%d"), ext[-1])
 	return filename
+
+
+def rename_upload_file(instance, filename):
+	return rename_upload(instance, filename, "archive/file")
+
+
+def rename_upload_pdf(instance, filename):
+	return rename_upload(instance, filename, "archive/pdf")
 
 
 class EIS_Archive(models.Model):
@@ -73,7 +80,7 @@ class EIS_Archive(models.Model):
 
 	note            = models.CharField(blank=True, max_length=250)
 
-	file_pdf        = models.FileField(blank=True, upload_to=rename_upload_file)
+	file_pdf        = models.FileField(blank=True, upload_to=rename_upload_pdf)
 	file            = models.FileField(blank=True, upload_to=rename_upload_file)
 
 	update_user     = models.CharField(max_length=200, default="Аноним")
@@ -121,6 +128,9 @@ class EIS_Archive(models.Model):
 				return "Ошибка"
 		else:
 			return ""
+
+	def get_month_str(self):
+		return LIST_MONTH[int(self.period_month)][1]
 
 
 @receiver(models.signals.pre_save, sender=EIS_Archive)

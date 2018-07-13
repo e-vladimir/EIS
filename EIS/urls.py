@@ -10,6 +10,9 @@ urlpatterns = [
     path('media/pdf/<str:filename>',     views.pdf_download),
     path('media/file/<str:filename>',    views.file_download),
 
+    path('media/archive/pdf/<str:filename>',     views.archive_pdf_download),
+    path('media/archive/file/<str:filename>',    views.archive_file_download),
+
     path('admin/logout/',                views.logout),
     path('admin/',                       admin.site.urls),
 

@@ -1,8 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from EIS.global_info import *
-from .models import EIS_Archive
+from .models import EIS_Archive, LIST_MONTH
 from .forms import ArchiveForm
 from django.utils import timezone
+
+
+class CMonth:
+	def get_month(self, in_month):
+		return LIST_MONTH[in_month]
 
 
 def page_archives(request):
@@ -48,13 +53,48 @@ def page_archives_filter(request, year=None, month=None, category=None):
 	if request.user.is_authenticated:
 		EIS_info['title'] = "Архив документов "
 
-		documents     = EIS_Archive.objects.all().order_by("period_year",
-		                                                   "period_month",
-		                                                   "category",
-		                                                   "description")
+		list_month     = []
+		list_category  = []
+		list_year      = []
+
+		list_documents = []
+
+		documents      = EIS_Archive.objects.all().order_by("period_year",
+		                                                    "period_month",
+		                                                    "category",
+		                                                    "description")
+
+		for document in documents:
+			doc_category = str(document.category)
+			doc_year     = str(document.period_year)
+			doc_month    = str(document.period_month)
+
+			include_doc  = False
+
+			if doc_year not in list_year: list_year.append(doc_year)
+
+			if category is not None:
+				include_doc = doc_category == str(category)
+			else:
+				if year is not None:
+					include_doc = doc_year == str(year)
+
+					if include_doc:
+						if doc_month not in list_month: list_month.append(int(doc_month))
+
+					if month is not None:
+						include_doc = include_doc and (int(doc_month) == int(month))
+
+			if include_doc:
+				list_documents.append(document)
+
+		# Фильтры
+		list_category.sort()
+		list_month.sort()
+		list_year.sort()
 
 		if category is not None:
-			EIS_info['title'] += "по категории {0}".format(category)
+			EIS_info['title'] += "по категории {0} ".format(category)
 
 		if year is not None:
 			if month is not None:
@@ -64,7 +104,16 @@ def page_archives_filter(request, year=None, month=None, category=None):
 
 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
-		return render(request, 'archives_period.html', {'EIS_info': EIS_info})
+		params = {'EIS_info'      : EIS_info,
+		          'list_year'     : list_year,
+		          'year_current'  : str(year),
+		          'category_current': str(category),
+		          'list_documents': list_documents,
+		          'list_month'    : list_month,
+		          'month_current' : month,
+		          'cmonth'        : LIST_MONTH}
+
+		return render(request, 'archives_filter.html', params)
 	else:
 		return render(request, 'index_public.html', {'EIS_info': EIS_info})
 
