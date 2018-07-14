@@ -14,4 +14,7 @@ urlpatterns = [
 	path('filter/<str:category>/<int:year>/<int:month>/', views.page_archives_filter),
 
 	path('new/',                                          views.page_archive_new),
+
+	path('view/<int:pk>/',                                views.page_archive_view),
+	path('edit/<int:pk>/',                                views.page_archive_edit),
 ]

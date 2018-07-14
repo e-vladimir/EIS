@@ -18,7 +18,7 @@ def month_to_str(in_month_num):
 	          "Ноябрь",
 	          "Декабрь"]
 
-	if in_month_num in range(1, 12):
-		return MONTHS[in_month_num - 1]
+	if int(in_month_num) in range(1, 12):
+		return MONTHS[int(in_month_num) - 1]
 	else:
 		return ""

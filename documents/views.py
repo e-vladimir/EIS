@@ -71,7 +71,7 @@ def page_document_edit(request, pk):
 
 				document.save()
 
-				return redirect('page_document_view', pk)
+				return redirect('/documents/view/{0}'.format(pk))
 		else:
 			form = DocumentForm(instance=document)
 			return render(request, 'document_new.html', {'EIS_info': EIS_info, 'form': form})

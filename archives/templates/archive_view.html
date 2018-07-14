@@ -1,5 +1,7 @@
 {% include "header.html" %}
 
+{% load archives_extras %}
+
 <table width="100%">
     <tr>
         <td width="165px" valign="top">{% include "menu.html" %}</td>
@@ -8,39 +10,48 @@
             <div class="content">
                 <table cellspacing="10px">
                         <tr>
-                            <td align="right"><span class="field">Фамилия Имя Отчество</span></td>
-                            <td>{{ contact.name }}</td>
+                            <td align="right"><span class="field">Год</span></td>
+                            <td>{{ document.period_year }}</td>
                         </tr>
                         <tr>
-                            <td align="right"><span class="field">Должность</span></td>
-                            <td>{{ contact.post }}</td>
-                        </tr>
-                        <tr>
-                            <td align="right"><span class="field">Организация</span></td>
-                            <td>{{ contact.organization }}</td>
+                            <td align="right"><span class="field">Месяц</span></td>
+                            <td>{% month_to_str document.period_month %}</td>
                         </tr>
                         <tr><td colspan="2"><hr></td></tr>
-                        <tr>
-                            <td align="right"><span class="field">Телефон рабочий</span></td>
-                            <td>{{ contact.phone }}</td>
-                        </tr>
-                        <tr>
-                            <td align="right"><span class="field">Телефон мобильный</span></td>
-                            <td>{{ contact.phone_mobile }}</td>
-                        </tr>
-                        <tr>
-                            <td align="right"><span class="field">e-mail</span></td>
-                            <td>{{ contact.email }}</td>
-                        </tr>
+
+                        {% if document.file_pdf %}
+                            <tr>
+                                <td align="right"><a href="{{ document.file_pdf.url }}" class="pdf">PDF</a></td>
+                                <td>{{ document.get_pdf_size }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if document.file %}
+                            <tr>
+                                <td align="right"><a href="{{ document.file.url }}" class="file">{{ document.get_extension }}</a></td>
+                                <td>{{ document.get_size }}</td>
+                            </tr>
+                        {% endif %}
                         <tr><td colspan="2"><hr></td></tr>
+
                         <tr>
                             <td align="right"><span class="field">Примечание</span></td>
-                            <td>{{ contact.note }}</td>
+                            <td>{{ document.note }}</td>
                         </tr>
                         <tr><td colspan="2"><hr></td></tr>
+
+                        <tr>
+                            <td align="right"><span class="field">Отметка архива</span></td>
+                            <td>{{ document.update_user }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right">&nbsp;</td>
+                            <td>{{ document.update_date|date:"d E Y" }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+
                     <tr>
                         <td>&nbsp;</td>
-                        <td><a href="/contacts/edit/{{ contact.pk }}/" class="edit">Редактировать</a></td>
+                        <td><a href="/archives/edit/{{ document.pk }}/" class="edit">Редактировать</a></td>
                     </tr>
                 </table>
             </div>

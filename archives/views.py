@@ -120,49 +120,49 @@ def page_archives_filter(request, year=None, month=None, category=None):
 		return render(request, 'index_public.html', {'EIS_info': EIS_info})
 
 
-# def page_contact_view(request, pk):
-# 	EIS_info = dict()
-# 	EIS_info['name']    = EIS_NAME
-# 	EIS_info['version'] = EIS_VERSION
-# 	EIS_info['module']  = "Contacts"
-#
-# 	if request.user.is_authenticated:
-# 		contact = get_object_or_404(EIS_Contact, pk=pk)
-#
-# 		EIS_info['title'] = contact.name
-# 		EIS_info['subtitle'] = contact.organization
-# 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
-#
-# 		return render(request, 'contact_view.html', {'EIS_info': EIS_info, 'contact': contact})
-# 	else:
-# 		return render(request, 'index_public.html', {'EIS_info': EIS_info})
-#
-#
-# def page_contact_edit(request, pk):
-# 	EIS_info            = dict()
-# 	EIS_info['name']    = EIS_NAME
-# 	EIS_info['version'] = EIS_VERSION
-# 	EIS_info['module']  = "Contacts"
-#
-# 	if request.user.is_authenticated:
-# 		contact = get_object_or_404(EIS_Contact, pk=pk)
-#
-# 		EIS_info['title'] = contact.name
-# 		EIS_info['subtitle'] = "{0}/{1}".format(contact.organization, contact.post)
-# 		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
-#
-# 		if request.method == "POST":
-# 			form = ContactForm(request.POST, request.FILES, instance=contact)
-#
-# 			if form.is_valid():
-# 				form.save()
-#
-# 				return redirect('page_contact_view', pk)
-# 		else:
-# 			form = ContactForm(instance=contact)
-# 			return render(request, 'contact_new.html', {'EIS_info': EIS_info, 'form': form})
-# 	else:
-# 		return render(request, 'index_public.html', {'EIS_info': EIS_info})
+def page_archive_view(request, pk):
+	EIS_info = dict()
+	EIS_info['name']    = EIS_NAME
+	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Archives"
+
+	if request.user.is_authenticated:
+		document = get_object_or_404(EIS_Archive, pk=pk)
+
+		EIS_info['title']    = document.category
+		EIS_info['subtitle'] = document.description
+		EIS_info['user']     = "{0} {1}".format(request.user.first_name, request.user.last_name)
+
+		return render(request, 'archive_view.html', {'EIS_info': EIS_info, 'document': document})
+	else:
+		return render(request, 'index_public.html', {'EIS_info': EIS_info})
+
+
+def page_archive_edit(request, pk):
+	EIS_info            = dict()
+	EIS_info['name']    = EIS_NAME
+	EIS_info['version'] = EIS_VERSION
+	EIS_info['module']  = "Archives"
+
+	if request.user.is_authenticated:
+		document = get_object_or_404(EIS_Archive, pk=pk)
+
+		EIS_info['title']    = document.category
+		EIS_info['subtitle'] = document.description
+		EIS_info['user']     = "{0} {1}".format(request.user.first_name, request.user.last_name)
+
+		if request.method == "POST":
+			form = ArchiveForm(request.POST, request.FILES, instance=document)
+
+			if form.is_valid():
+				form.save()
+
+				return redirect('/archives/view/{0}'.format(pk))
+		else:
+			form = ArchiveForm(instance=document)
+			return render(request, 'archive_new.html', {'EIS_info': EIS_info, 'form': form})
+	else:
+		return render(request, 'index_public.html', {'EIS_info': EIS_info})
 
 
 def page_archive_new(request):
