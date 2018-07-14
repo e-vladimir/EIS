@@ -9,28 +9,24 @@
                 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <table cellspacing="10px">
                         <tr>
-                            <td align="right"><span class="field">Название документа</span></td>
-                            <td>{{ form.name }}</td>
+                            <td align="right"><span class="field">Период (год)</span></td>
+                            <td>{{ form.period_year }}</td>
                         </tr>
+                        <tr>
+                            <td align="right"><span class="field">Период (месяц)</span></td>
+                            <td>{{ form.period_month }}</td>
+                        </tr>
+                        <tr><td colspan="2"><hr></td></tr>
+
                         <tr>
                             <td align="right"><span class="field">Категория</span></td>
                             <td>{{ form.category }}</td>
                         </tr>
                         <tr>
-                            <td align="right"><span class="field">Дата утверждения</span></td>
-                            <td>{{ form.date }}</td>
+                            <td align="right"><span class="field">Описание</span></td>
+                            <td>{{ form.description }}</td>
                         </tr>
-                        <tr><td>&nbsp;</td><td><font color="red">Не забывайте указывать дату документа</font></td></tr>
-                        <tr><td colspan="2"><hr></td></tr>
-                        <tr>
-                            <td align="right"><span class="field">PDF</span></td>
-                            <td>{{ form.file_pdf }}</td>
-                        </tr>
-                        <tr>
-                            <td align="right"><span class="field">Файл</span></td>
-                            <td>{{ form.file }}</td>
-                        </tr>
-                        <tr><td colspan="2"><hr></td></tr>
+
                         <tr>
                             <td align="right"><span class="field">Примечание</span></td>
                             <td>{{ form.note }}</td>
@@ -38,10 +34,20 @@
 
                         <tr><td colspan="2"><hr></td></tr>
                         <tr>
+                            <td align="right"><span class="field">PDF файл</span></td>
+                            <td>{{ form.file_pdf }}</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="field">Файл</span></td>
+                            <td>{{ form.file }}</td>
+                        </tr>
+
+                        <tr><td colspan="2"><hr></td></tr>
+                        <tr>
                             <td>&nbsp;</td>
                             <td>
                                 <button type="submit" class="btn">Сохранить</button>&nbsp;
-                                <a href="/documents/" class="cancel">Отмена</button></a>
+                                <a href="/archives/" class="cancel">Отмена</button></a>
                             </td>
                         </tr>
                     </table>

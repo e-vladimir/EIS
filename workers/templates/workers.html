@@ -34,7 +34,9 @@
                                         {% endif %}
                                     </td>
                                 </tr>
-                                <tr><td colspan="5"><hr></td></tr>
+                                {% if worker != category.list|last %}
+                                    <tr><td colspan="5"><hr></td></tr>
+                                {% endif %}
                             </table>
                         {% endfor %}
                     </details></td></tr>

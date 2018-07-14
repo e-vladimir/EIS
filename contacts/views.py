@@ -58,7 +58,7 @@ def page_contact_edit(request, pk):
 			if form.is_valid():
 				form.save()
 
-				return redirect('page_contact_view', pk)
+				return redirect('/contacts/view/{0}'.format(pk))
 		else:
 			form = ContactForm(instance=contact)
 			return render(request, 'contact_new.html', {'EIS_info': EIS_info, 'form': form})
@@ -82,7 +82,7 @@ def page_contact_new(request):
 			if form.is_valid():
 				form.save()
 
-				return redirect('page_contacts')
+				return redirect('/contacts/')
 		else:
 			form = ContactForm()
 			return render(request, 'contact_new.html', {'EIS_info': EIS_info, 'form': form})

@@ -1,0 +1,38 @@
+{% include "header.html" %}
+
+<table width="100%">
+    <tr>
+        <td width="165px" valign="top">{% include "menu.html" %}</td>
+        <td valign="top">
+            <div class="content">
+                <table width="100%">
+                    <tr>
+                        <td valign="top" width="100px">
+                            <table>
+                                <tr><td class="archive_current">Период</td></tr>
+
+                                {% for year in list_year %}
+                                    <tr><td class="archive_action"><a href="/archives/filter/{{year}}/">{{year}}</a></td></tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+
+                        <td valign="top" width="200px">
+                            <table>
+                                <tr><td class="archive_current">Тип документа</td></tr>
+                                {% for category in list_category %}
+                                    <tr><td class="archive_action"><a href="/archives/filter/{{category}}/">{{category}}</a></td></tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+
+                        <td valign="top" align="left">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+
+{% include "end.html" %}

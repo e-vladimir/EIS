@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from EIS import settings
 from . import views
 
@@ -8,8 +8,8 @@ from . import views
 # /contacts/new - создание
 
 urlpatterns = [
-	url(r'^$', views.page_contacts, name='page_contacts'),
-	url(r'^new/', views.page_contact_new, name='page_contact_new'),
-	url(r'^view/(?P<pk>[0-9]+)/$', views.page_contact_view, name='page_contact_view'),
-	url(r'^edit/(?P<pk>[0-9]+)/$', views.page_contact_edit, name='page_contact_edit'),
+	path('',               views.page_contacts),
+	path('new/',           views.page_contact_new),
+	path('view/<int:pk>/', views.page_contact_view),
+	path('edit/<int:pk>/', views.page_contact_edit),
 ]

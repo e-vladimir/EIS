@@ -1,32 +1,25 @@
-"""EIS URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
-from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import RedirectView
+from django.urls import path, include
 
 from . import views
 
 urlpatterns = [
-    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
-    url(r'^media/pdf/(?P<filename>.*)$', views.pdf_download, name="pdf_download"),
-    url(r'^media/file/(?P<filename>.*)$', views.file_download, name="file_download"),
-    url(r'^admin/logout/', views.logout),
-    url(r'^workers/', include('workers.urls')),
-    url(r'^documents/', include('documents.urls')),
-    url(r'^contacts/', include('contacts.urls')),
-    url(r'^admin/', admin.site.urls),
-    url(r'', views.page_index),
+    path('favicon.ico',                  RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
+
+    path('media/pdf/<str:filename>',     views.pdf_download),
+    path('media/file/<str:filename>',    views.file_download),
+
+    path('media/archive/pdf/<str:filename>',     views.archive_pdf_download),
+    path('media/archive/file/<str:filename>',    views.archive_file_download),
+
+    path('admin/logout/',                views.logout),
+    path('admin/',                       admin.site.urls),
+
+    path('workers/',                     include('workers.urls')),
+    path('documents/',                   include('documents.urls')),
+    path('contacts/',                    include('contacts.urls')),
+    path('archives/',                    include('archives.urls')),
+
+    path('',                             views.page_index),
 ]

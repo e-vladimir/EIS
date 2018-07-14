@@ -58,7 +58,7 @@ def page_worker_edit(request, pk):
 			if form.is_valid():
 				form.save()
 
-				return redirect('page_worker_view', pk)
+				return redirect('/workers/view/{0}'.format(pk))
 		else:
 			form = WorkerForm(instance=worker)
 			return render(request, 'worker_new.html', {'EIS_info': EIS_info, 'form': form})
@@ -81,7 +81,7 @@ def page_worker_new(request):
 			if form.is_valid():
 				form.save()
 
-				return redirect('page_workers')
+				return redirect('/workers/')
 		else:
 			form = WorkerForm()
 			return render(request, 'worker_new.html', {'EIS_info': EIS_info, 'form': form})

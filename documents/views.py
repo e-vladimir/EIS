@@ -39,9 +39,9 @@ def page_document_view(request, pk):
 	if request.user.is_authenticated:
 		document = get_object_or_404(EIS_Document, pk=pk)
 
-		EIS_info['title'] = document.name
+		EIS_info['title']    = document.name
 		EIS_info['subtitle'] = document.category
-		EIS_info['user'] = "{0} {1}".format(request.user.first_name, request.user.last_name)
+		EIS_info['user']     = "{0} {1}".format(request.user.first_name, request.user.last_name)
 
 		return render(request, 'document_view.html', {'EIS_info': EIS_info, 'document': document})
 	else:
@@ -71,7 +71,7 @@ def page_document_edit(request, pk):
 
 				document.save()
 
-				return redirect('page_document_view', pk)
+				return redirect('/documents/view/{0}'.format(pk))
 		else:
 			form = DocumentForm(instance=document)
 			return render(request, 'document_new.html', {'EIS_info': EIS_info, 'form': form})
@@ -99,7 +99,7 @@ def page_document_new(request):
 
 				document.save()
 
-				return redirect('page_documents')
+				return redirect('/documents/')
 		else:
 			form = DocumentForm()
 			return render(request, 'document_new.html', {'EIS_info': EIS_info, 'form': form})
