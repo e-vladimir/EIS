@@ -81,7 +81,7 @@ def page_worker_new(request):
 			if form.is_valid():
 				form.save()
 
-				return redirect('page_workers')
+				return redirect('/workers/')
 		else:
 			form = WorkerForm()
 			return render(request, 'worker_new.html', {'EIS_info': EIS_info, 'form': form})

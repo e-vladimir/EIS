@@ -99,7 +99,7 @@ def page_document_new(request):
 
 				document.save()
 
-				return redirect('page_documents')
+				return redirect('/documents/')
 		else:
 			form = DocumentForm()
 			return render(request, 'document_new.html', {'EIS_info': EIS_info, 'form': form})

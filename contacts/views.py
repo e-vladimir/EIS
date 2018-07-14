@@ -82,7 +82,7 @@ def page_contact_new(request):
 			if form.is_valid():
 				form.save()
 
-				return redirect('page_contacts')
+				return redirect('/contacts/')
 		else:
 			form = ContactForm()
 			return render(request, 'contact_new.html', {'EIS_info': EIS_info, 'form': form})
