@@ -1,8 +1,8 @@
+from EIS.global_info  import *
 from django.shortcuts import render, get_object_or_404, redirect
-from EIS.global_info import *
-from .models import EIS_Archive, LIST_MONTH
-from .forms import ArchiveForm
-from django.utils import timezone
+from django.utils     import timezone
+from .forms           import ArchiveForm
+from .models          import EIS_Archive, LIST_MONTH
 
 
 def page_archives(request):
@@ -64,14 +64,13 @@ def page_archives_filter(request, year=None, month=None, category=None):
 			doc_year     = str(document.period_year)
 			doc_month    = str(document.period_month)
 
-			include_doc  = False
-
-			if doc_year not in list_year: list_year.append(doc_year)
-
 			if category is not None:
 				include_doc = doc_category == str(category)
 			else:
 				include_doc = True
+
+			if include_doc:
+				if doc_year not in list_year: list_year.append(doc_year)
 
 			if year is not None:
 				include_doc = include_doc and (doc_year == str(year))
