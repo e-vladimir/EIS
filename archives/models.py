@@ -1,7 +1,7 @@
 import os
-from django.db import models
+from django.db       import models
 from django.dispatch import receiver
-from django.utils import timezone
+from django.utils    import timezone
 
 
 ARCHIVES_CATEGORIES = [
@@ -27,6 +27,7 @@ ARCHIVES_CATEGORIES = [
 	"Протокола (наблюдатальный совет)",
 	"Документация (закупки)",
 	"Документация",
+	"Локальные положения",
 
 	"Проекты",
 
