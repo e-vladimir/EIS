@@ -1,2 +1,2 @@
 EIS_NAME    = 'АПТ'
-EIS_VERSION = '2.18.07.14'
+EIS_VERSION = '2.18.07.25'
